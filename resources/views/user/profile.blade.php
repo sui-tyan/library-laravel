@@ -5,7 +5,6 @@
   <div class="profile mt-2">
     <div class="image-container border rounded-md w-full lg:w-9/12 p-10">
       <img src="{{url('/images/user.png')}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
-
       <ul class="text-sm font-medium text-gray-900 bg-white rounded-lg text-center lg:text-left mb-2.5">
         <input type="file" name="profile-image" id="">
         <div class="relative z-0 w-full mb-6 group mt-5">
@@ -13,6 +12,7 @@
           <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Change Password</label>
         </div>
       </ul>
+      <a class="py-5" href="/list/transaction/{{$user->id}}">Transaction History</a>
     </div>
     <div class="mt-5">
       <a href="/logout" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Logout</a>

@@ -62,7 +62,7 @@
               <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Profile
               </a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <a href="/logout" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Logout
               </a>
             </li>
@@ -176,7 +176,7 @@
                   </li>
 
                   <li>
-                    <a href="/admin/departments" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                    <a href="/admin/borrowers" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                       </svg>
@@ -196,7 +196,7 @@
                   </li>
 
                   <li>
-                    <a href="/admin/departments" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                    <a href="/admin/staff-list" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                       </svg>
@@ -218,16 +218,6 @@
               </div>
             </li>
             <li>
-              <a href="/admin/logs" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                </svg>
-
-                <span class="ml-3 flex-1 whitespace-nowrap">Logs</span>
-              </a>
-            </li>
-            <li>
-            <li>
               <a href="/admin/list-of-transactions" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
@@ -242,8 +232,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-
-              <span class="ml-4">Logged in as:</span>
+              @if(Auth::check())
+              <span class="ml-4">Logged in as: {{Auth::user()->name}}</span>
+              @endif
             </div>
           </div>
         </div>
@@ -261,123 +252,157 @@
               <div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Transaction History</h3>
               </div>
-              <form action="/admin/filter/list-of-transactions" method="post">
+              <form method="post" action="/admin/search/list-of-transactions">
                 @csrf
-                <div date-rangepicker class="flex items-center">
-                  <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                      </svg>
-                    </div>
-                    <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
-                  </div>
-                  <span class="mx-4 text-gray-500">to</span>
-                  <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                      </svg>
-                    </div>
-                    <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
-                  </div><button type="submit" class="ml-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
-                </div>
-              </form>
+                <div class="flex justify-end">
 
+                  <div class="relative z-0 group ">
+                    <input type="text" name="search" id="search" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <label for="search" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Search</label>
+
+                  </div>
+                  <button type="submit" class="ml-5 mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
+
+              </form>
+              <div class="flex items-center">
+                <a href="/admin/export/available-csv" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table</a>
+                <a href="/admin/export/available-pdf" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table as PDF</a>
+              </div>
             </div>
 
-            <div class="flex flex-col mt-8">
-              <div class="overflow-x-auto rounded-lg">
-                <div class="align-middle inline-block min-w-full">
-                  <div class="shadow overflow-hidden sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                      <thead class="bg-gray-50">
-                        <tr>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ISBN/ISSN
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Title
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Category
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Borrower
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Purpose
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Date Borrowed
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Due Date
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Date Returned
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Remarks
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Status
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody class="bg-gray-50 border">
-                        @foreach($transactions as $transaction)
-                        <tr class="border whitespace-nowrap text-sm font-semibold text-gray-900">
 
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            @if($transaction->isbn == 'none' && $transaction->issn == 'none')
-                            N/A
-                            @elseif($transaction->isbn != "none")
-                            {{$transaction->isbn}}
-                            @else if($transaction->issn != 'none')
-                            {{$transaction->issn}}
-                            @endif
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->title}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                            {{$transaction->categories}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->borrower}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->purpose}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->dateBorrowed}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->dueDate}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->dateReturned}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->remarks}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$transaction->status}}
-                          </td>
-                          @endforeach
-                        </tr>
-                      </tbody>
-                    </table>
+
+
+          </div>
+          <form action="/admin/filter/list-of-transactions" method="post">
+            @csrf
+            <div class="flex justify-end">
+
+              <div class="w-1/4 mr-5">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="status" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected value="none">Transaction Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="returned">Returned</option>
+                  <option value="claimed">Claimed</option>
+                </select>
+              </div>
+              <div date-rangepicker class="flex items-center">
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
                   </div>
+                  <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                </div>
+                <span class="mx-4 text-gray-500">to</span>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                </div>
+                <button type="submit" class="ml-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+              </div>
+            </div>
+          </form>
+
+
+          <div class="flex flex-col mt-8">
+            <div class="overflow-x-auto rounded-lg">
+              <div class="align-middle inline-block min-w-full">
+                <div class="shadow overflow-hidden sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          ISBN/ISSN
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Title
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Category
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Borrower
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Purpose
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date Borrowed
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Due Date
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date Returned
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Remarks
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 border">
+                      @foreach($transactions as $transaction)
+                      <tr class="border whitespace-nowrap text-sm font-semibold text-gray-900">
+
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          @if($transaction->isbn == 'none' && $transaction->issn == 'none')
+                          N/A
+                          @elseif($transaction->isbn != "none")
+                          {{$transaction->isbn}}
+                          @else if($transaction->issn != 'none')
+                          {{$transaction->issn}}
+                          @endif
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->title}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          {{$transaction->categories}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->borrower}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->purpose}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->dateBorrowed}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->dueDate}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->dateReturned}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->remarks}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->status}}
+                        </td>
+                        @endforeach
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
   </div>
+  </main>
+</div>
 </div>
 <script type="text/javascript" src="{{ URL::asset('js/datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/dropdown.js') }}"></script>

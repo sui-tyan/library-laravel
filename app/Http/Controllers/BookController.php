@@ -257,7 +257,9 @@ class BookController extends Controller
         ->where('isbn', '!=', 'none')
         ->where('issn', '=', 'none')
         ->get();
-        $books=DB::table('books')->where('status', '=', 'Available')->get();
+
+        $books=$books->where('status', '=', 'Available');
+
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, "notifications"=>$notifications])->with('success', 'Books')->with('link', 'books');
     }
@@ -267,7 +269,7 @@ class BookController extends Controller
         ->where('issn', '!=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $books=$books->where('status', '=', 'Available');
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Journals')->with('link', 'journals');
     }
@@ -277,7 +279,58 @@ class BookController extends Controller
         ->where('issn', '=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $books=$books->where('status', '=', 'Available');
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Thesis')->with('link', 'thesis');
+    }
+    
+    public function searchBooksList(Request $req){
+
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+
+        $books=DB::table('books')
+        ->where('isbn', '!=', 'none')
+        ->where('issn', '=', 'none')
+        ->get();
+        $books=$books->where('status', '=', 'Available');
+        $books=$books->where('title', '=', $req['search']);
+        
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, "notifications"=>$notifications])->with('success', 'Books')->with('link', 'books');
+    }
+
+    public function searchJournalsList(Request $req){
+        
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+
+        $books=DB::table('books')
+        ->where('isbn', '=', 'none')
+        ->where('issn', '!=', 'none')
+        ->get();
+        $books=$books->where('status', '=', 'Available');
+        $books=$books->where('title', '=', $req['search']);
+
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Journals')->with('link', 'journals');
+
+    }
+    public function searchThesisList(Request $req){
+
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+
+        $books=DB::table('books')
+        ->where('isbn', '=', 'none')
+        ->where('issn', '!=', 'none')
+        ->get();
+        $books=$books->where('status', '=', 'Available');
+        $books=$books->where('title', '=', $req['search']);
+
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Thesis')->with('link', 'thesis');
     }

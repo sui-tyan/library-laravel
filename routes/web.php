@@ -17,18 +17,6 @@ use App\Http\Middleware\checkAccountType;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get("/login", [UserController::class, "login"])->name("login")->middleware('guest');
-
-Route::get("/logout", [UserController::class, "logout"]);
-Route::get("/", [UserController::class, "home"]);
-Route::get("/books", [BookController::class, "books"]);
-Route::get("/find-books", [BookController::class, "findBooks"]);
-Route::post("/query-book", [BookController::class, "queryBook"]);
-Route::get("/profile", [UserController::class, "showProfile"])->middleware("auth");
-Route::get("/books/{id}", [BookController::class, "showBook"]);
-Route::get("/category/{id}", [BookController::class, "showCategories"]);
-Route::get("/borrow/{id}", [UserController::class, "borrowBook"]);
-Route::post("/create-transaction", [UserController::class, "createTransaction"]);
 
 Route::group(['middleware' => ['admin']], function(){
 
@@ -42,7 +30,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get("/admin/create-account", [UserController::class, "createAccount"]);
     Route::get("/admin/departments", [UserController::class, "addDepartment"]);
     Route::get("/admin/borrowers", [UserController::class, "showBorrowers"]);
-    Route::get("/admin/list-of-borrowers", [UserController::class, "showListBorrowers"]);
+    // Route::get("/admin/list-of-borrowers", [UserController::class, "showListBorrowers"]);
     Route::get("/admin/journals", [BookController::class, 'addJournal']);
     Route::get("/admin/thesis", [BookController::class, 'addThesis']);
     Route::get("/admin/books", [BookController::class, "addBook"]);
@@ -71,10 +59,28 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get("/admin/seen/{id}", [NotificationController::class, "seen"]);
     
     Route::get("/admin/profile/{id}", [UserController::class, "showAdminProfile"]);
-    Route::post("/admin/udpate/student/profile", [UserController::class, 'updateStudent']);
+    Route::post("/admin/update/student/profile", [UserController::class, 'updateStudent']);
 
     Route::get("/admin/list-of-transactions", [UserController::class, "showListTransaction"]);
     Route::post("/admin/filter/list-of-transactions", [UserController::class, "filterListTransaction"]);
+    Route::post("/admin/search/list-of-transactions", [UserController::class, "searchListTransaction"]);
+
+    Route::get("/admin/staff-list", [UserController::class, "showStaffList"]);
+    Route::get("/admin/staff/profile/{id}", [UserController::class, "showStaffProfile"]);
+    Route::post("/admin/update/staff/profile", [UserController::class, 'updateStaff']);
+
+    Route::post("/admin/available/search", [UserController::class, "searchAvailableBooks"]);
+    Route::post("/admin/search/requested", [UserController::class, "searchRequestedList"]);
+    Route::post("/admin/search/returned", [UserController::class, "searchReturnedList"]);
+    
+    Route::post("/admin/search/list/Books", [BookController::class, "searchBooksList"]);
+    Route::post("/admin/search/list/Journals", [BookController::class, "searchJournalsList"]);
+    Route::post("/admin/search/list/Thesis", [BookController::class, "searchThesisList"]);
+
+    Route::post("/admin/search/borrower", [UserController::class, "searchBorrowerList"]);
+    Route::post("/admin/search/staff", [UserController::class, "searchStaffList"]);
+
+
     Route::get('/admin/export/csv', [UserController::class, "exportCsv"]);
     Route::get('/admin/export/available-csv', [UserController::class, "exportAvailableCsv"]);
     Route::get('/admin/export/available-pdf', [UserController::class, "exportAvailablePdf"]);
@@ -83,10 +89,25 @@ Route::group(['middleware' => ['admin']], function(){
 
 
 
+Route::get("/login", [UserController::class, "login"])->name("login")->middleware('guest');
+
+Route::get("/logout", [UserController::class, "logout"]);
+Route::get("/", [UserController::class, "home"]);
+Route::get("/books", [BookController::class, "books"]);
+Route::get("/find-books", [BookController::class, "findBooks"]);
+Route::post("/query-book", [BookController::class, "queryBook"]);
+Route::get("/profile", [UserController::class, "showProfile"])->middleware("auth");
+Route::get("/books/{id}", [BookController::class, "showBook"]);
+Route::get("/category/{id}", [BookController::class, "showCategories"]);
+Route::get("/borrow/{id}", [UserController::class, "borrowBook"]);
+Route::post("/create-transaction", [UserController::class, "createTransaction"]);
+
+Route::get("/list/transaction/{id}", [UserController::class, "showUserTransactions"]);
+
+
 
 Route::post("/authenticate", [UserController::class, "authenticate"]);
 
-// Route::get("/admin/add-data", [UserController::class, "addData"]);
 
 Route::get("/admin/login", [UserController::class, "adminLogin"]);
 Route::post("/admin/authenticate", [UserController::class, "adminAuthenticate"]);

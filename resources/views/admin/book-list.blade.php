@@ -62,7 +62,7 @@
               <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Profile
               </a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <a href="/logout" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Logout
               </a>
             </li>
@@ -176,7 +176,7 @@
                   </li>
 
                   <li>
-                    <a href="/admin/departments" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                    <a href="/admin/borrowers" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                       </svg>
@@ -196,7 +196,7 @@
                   </li>
 
                   <li>
-                    <a href="/admin/departments" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                    <a href="/admin/staff-list" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                       </svg>
@@ -228,12 +228,12 @@
             </li>
             <li>
             <li>
-              <a href="#" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+              <a href="/admin/list-of-transactions" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
                 </svg>
 
-                <span class="ml-3 flex-1 whitespace-nowrap">Transaction</span>
+                <span class="ml-3 flex-1 whitespace-nowrap">Transactions</span>
               </a>
             </li>
           </ul>
@@ -242,8 +242,9 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-
-              <span class="ml-4">Logged in as:</span>
+              @if(Auth::check())
+              <span class="ml-4">Logged in as: {{Auth::user()->name}}</span>
+              @endif
             </div>
           </div>
         </div>
@@ -261,122 +262,137 @@
               <div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">{{$success}}</h3>
               </div>
-              <a href="/admin/{{$link}}">
-                <div class="bg-green-300 shadow rounded-lg">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 p-2">
-                      <span class="text-md leading-none font-bold text-gray-900">Add {{$success}}</span>
+              <form method="post" action="/admin/search/list/{{$success}}">
+                @csrf
+                <div class="flex justify-end">
+
+                  <div class="relative z-0 group ">
+                    <input type="text" name="search" id="search" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <label for="search" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Search</label>
+
+                  </div>
+                  <button type="submit" class="ml-5 mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
+
+              </form>
+              <div class="flex items-center">
+                <a href="/admin/export/available-csv" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table</a>
+                <a href="/admin/export/available-pdf" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table as PDF</a>
+                <a href="/admin/{{$link}}">
+                  <div class="bg-green-300 shadow rounded-lg">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 p-2">
+                        <span class="text-md leading-none font-bold text-gray-900">Add {{$success}}</span>
+                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
                     </div>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
+
             </div>
+          </div>
+          <div class="flex flex-col mt-8">
+            <div class="overflow-x-auto rounded-lg">
+              <div class="align-middle inline-block min-w-full">
+                <div class="shadow overflow-hidden sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        @if($success == 'Journals')
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          ISSN
+                        </th>
+                        @elseif($success == 'Books')
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          ISBN
+                        </th>
+                        @else
+                        @endif
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Title
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Description
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Category
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Author
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Price
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Remarks
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 border">
+                      @foreach($books as $book)
+                      <tr class="border">
+                        @if($success == 'Journals')
 
-            <div class="flex flex-col mt-8">
-              <div class="overflow-x-auto rounded-lg">
-                <div class="align-middle inline-block min-w-full">
-                  <div class="shadow overflow-hidden sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
-                      <thead class="bg-gray-50">
-                        <tr>
-                          @if($success == 'Journals')
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ISSN
-                          </th>
-                          @elseif($success == 'Books')
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ISBN
-                          </th>
-                          @else
-                          @endif
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Title
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Description
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Category
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Author
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Price
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Status
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Remarks
-                          </th>
-                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody class="bg-gray-50 border">
-                        @foreach($books as $book)
-                        <tr class="border">
-                          @if($success == 'Journals')
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->issn}}
+                        </td>
+                        @elseif($success == 'Books')
 
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->issn}}
-                          </td>
-                          @elseif($success == 'Books')
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->isbn}}
+                        </td>
+                        @else
+                        @endif
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->title}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          {{Illuminate\Support\Str::limit($book->description, 30) }}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->categories}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->author}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->price}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->status}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->remarks}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
 
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->isbn}}
-                          </td>
-                          @else
-                          @endif
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->title}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                            {{Illuminate\Support\Str::limit($book->description, 30) }}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->categories}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->author}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->price}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->status}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                            {{$book->remarks}}
-                          </td>
-                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-
-                            <span class="inline-block">
-                              <a href="/admin/edit/book/{{$book->id}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                </svg>
-                              </a>
-                            </span>
-                            <span class="inline-block">
-                              <a href="/admin/delete/book/{{$book->id}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                </svg>
-                              </a>
-                            </span>
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
+                          <span class="inline-block">
+                            <a href="/admin/edit/book/{{$book->id}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                              </svg>
+                            </a>
+                          </span>
+                          <span class="inline-block">
+                            <a href="/admin/delete/book/{{$book->id}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                              </svg>
+                            </a>
+                          </span>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

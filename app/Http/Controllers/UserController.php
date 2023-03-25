@@ -14,7 +14,7 @@ use App\Models\Book;
 use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
-use PDF;
+use \PDF;
 
 class UserController extends Controller
 {
@@ -233,14 +233,14 @@ class UserController extends Controller
         return view("admin.borrowers", ["students"=>$users, 'notifications'=>$notifications]);
     }
 
-    public function showListBorrowers(){
-        $users = DB::table('users')
-        ->where('account_type', '=', 'student')
-        ->get();
-        $books=DB::table('books')->where('status', '=', 'Available')->get();
-        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("admin.list-borrowers", ["students"=>$users, 'notifications'=>$notifications]);
-    }
+    // public function showListBorrowers(){
+    //     $users = DB::table('users')
+    //     ->where('account_type', '=', 'student')
+    //     ->get();
+    //     $books=DB::table('books')->where('status', '=', 'Available')->get();
+    //     $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+    //     return view("admin.list-borrowers", ["students"=>$users, 'notifications'=>$notifications]);
+    // }
 
     public function showRequestedList(){
         $requested = DB::table('transactions')
@@ -258,13 +258,7 @@ class UserController extends Controller
         ->get();
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("admin.returned", ["transactions"=>$requested, 'notification'=>$notifications]);
-    }
-
-    public function addData(){
-        $books=DB::table('books')->where('status', '=', 'Available')->get();
-        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("admin.add-data", ['notification'=>$notifications]);
+        return view("admin.returned", ["transactions"=>$requested, 'notifications'=>$notifications]);
     }
 
     public function deleteStudent($id){
@@ -323,18 +317,46 @@ class UserController extends Controller
     }
 
     public function filterListTransaction(Request $req){
+
+        if(empty($req['start']) && empty($req['end']) && $req['status'] == 'none'){
+            
+            $transactions=Transaction::all();
+            $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+            return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
+
+        } else if(empty($req['start']) && empty($req['end']) && $req['status'] != 'none') {
+
+            $transactions=DB::table('transactions')->where('status', '=', $req['status'])->get();
+            $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+            return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
+
+        } else if($req['start'] && $req['end'] && $req['status'] == 'none'){
+            $req['start'] = Carbon::createFromFormat('m/d/Y', $req->start)->format('Y-m-d');
+            $req['end'] = Carbon::createFromFormat('m/d/Y', $req->end)->format('Y-m-d');
+            $transactions=DB::table('transactions')->whereBetween('dateBorrowed', [$req['start'], $req['end']])->get();
+            $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+            return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
+
+        } else {
+            $req['start'] = Carbon::createFromFormat('m/d/Y', $req->start)->format('Y-m-d');
+            $req['end'] = Carbon::createFromFormat('m/d/Y', $req->end)->format('Y-m-d');
+            $transactions=DB::table('transactions')->whereBetween('dateBorrowed', [$req['start'], $req['end']])->get();
+            $transactions = $transactions->where('status', '=', $req['status']);
+            $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+            return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
+        }
+
+    }
+
+    public function searchListTransaction(Request $req){
         $validated=$req->validate([
-            'start'=>'required',
-            'end'=>'required',
+            'search'=>'required'
         ]);
-        $validated['start'] = Carbon::createFromFormat('m/d/Y', $req->start)->format('Y-m-d');
-        $validated['end'] = Carbon::createFromFormat('m/d/Y', $req->end)->format('Y-m-d');
-
-
-        $transactions=DB::table('transactions')->whereBetween('dateBorrowed', [$validated['start'], $validated['end']])->get();
+        $transactions=DB::table('transactions')->where('title', '=', $req['search'])->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-
         return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
+
+        
 
     }
 
@@ -365,7 +387,7 @@ class UserController extends Controller
     
     }
     
-    public function exportAvailableCsv($table){
+    public function exportAvailableCsv(){
         
         $list=DB::table('books')->where('status', '=', 'Available')->get()->toArray();
 
@@ -397,10 +419,128 @@ class UserController extends Controller
     }
 
     public function exportAvailablePdf(){
-        $books = Book::all();
 
-        $pdf = PDF::loadView('pdf', compact('books'));
-
-        return $pdf->download('books.pdf');
+        $user = DB::table('books')->where('status', '=', 'Available')->get();
+        $pdf = PDF::loadView('admin.pdf',compact('user'));
+            return $pdf->download('pdfview.pdf');
     }
+
+    public function showStaffList(){
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        $users=DB::table('users')->where('account_type', '=', 'admin')->orWhere('account_type', '=', "staff")->get();
+        return view("admin.staff-list", ['notifications'=>$notifications, 'users'=>$users])->with('link', 'books');
+    }
+
+    public function showStaffProfile($id){
+        $staffs=User::findOrFail($id);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.staff-profile", ['notifications'=>$notifications, 'staff'=>$staffs])->with('link', 'books');
+        
+    }
+
+    public function updateStaff(Request $req){
+
+        $validated=$req->validate([
+            'firstName'=>'required',
+            'middleName'=>'required',
+            'lastName'=>'required',
+            'name'=>'required',
+            'account_type'=>'required',
+        ]);
+
+        $user = User::find($req->id);
+        if($req->password != null){
+            $validated['password']=Hash::make($req['password']);
+            $user->password = $validated['password'];
+        }
+        $user->firstName = $validated['firstName'];
+        $user->middleName = $validated['middleName'];
+        $user->lastName = $validated['lastName'];
+        $user->name = $validated['name'];
+        $user->account_type = $validated['account_type'];
+        $user->save();
+
+        return redirect("/admin/staff/profile/" . $req->id)->with("saved", "Profile updated!");
+    }
+
+    public function searchAvailableBooks(Request $req){
+        
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+        $book=DB::table('books')->where('status', '=', 'Available')->get();
+        $books=$book->where('title', '=', $req['search']);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.dashboard", ['books'=>$books, 'notifications'=>$notifications]);
+    }
+
+    public function searchRequestedList(Request $req){
+        
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+        
+        $request = DB::table('transactions')
+        ->where('status', '=', 'pending')
+        ->orWhere('status', '=', 'claimed')
+        ->get();
+
+        $requested=$request->where('title', '=', $req['search']);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.requested", ['transactions'=>$requested, 'notifications'=>$notifications]);
+    }
+    public function searchReturnedList(Request $req){
+        
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+        
+        $request = DB::table('transactions')
+        ->where('status', '=', 'returned')
+        ->get();
+        
+        $requested=$request->where('title', '=', $req['search']);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.returned", ['transactions'=>$requested, 'notifications'=>$notifications]);
+    }
+
+    public function searchBorrowerList(Request $req){
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+
+        $request = DB::table('users')
+        ->where('account_type', '=', 'student')->get();
+        
+        $requested=$request->where('firstName', '=', $req['search']);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        // $users=DB::table('users')->where('account_type', '=', 'student')->get();
+        // $users=$users->where('firstName', '=', $req['search'])->orWhere('middleName', '=', $req['search'])->orWhere('lastName', '=', $req['search']);
+        return view("admin.borrowers", ['notifications'=>$notifications, 'students'=>$requested]);
+    }
+
+    public function searchStaffList(Request $req){
+        
+        $validated=$req->validate([
+            'search'=>'required'
+        ]);
+
+        
+
+        $users = DB::table('users')
+        ->where('account_type', '=', 'admin')->orWhere('account_type', '=', 'staff')->get();
+        
+        $users=$users->where('name', '=', $req['search']);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        // $users=DB::table('users')->where('account_type', '=', 'student')->get();
+        // $users=$users->where('firstName', '=', $req['search'])->orWhere('middleName', '=', $req['search'])->orWhere('lastName', '=', $req['search']);
+        return view("admin.staff-list", ['notifications'=>$notifications, 'users'=>$users])->with('link', 'books');
+    }
+
+    public function showUserTransactions($id){
+        $user=User::findOrFail($id);
+        $transactions = DB::table('transactions')->where('borrowerID', '=', $user->studentID)->get();
+        return view("user.transaction-history", ['transactions'=>$transactions]);
+    }
+    
 }
