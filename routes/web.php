@@ -44,8 +44,13 @@ Route::get("/admin/requested-list", [UserController::class, "showRequestedList"]
 Route::get("/admin/returned-list", [UserController::class, "showReturnedList"]);
 
 Route::get("/admin/books", [BookController::class, "addBook"]);
+
 Route::post("/admin/add-book", [BookController::class, "postBook"]);
 Route::post("/admin/update-book", [BookController::class, "updateBook"]);
+Route::get("/admin/journals", [BookController::class, 'addJournal']);
+Route::post("/admin/add-journal", [BookController::class, "postJournal"]);
+Route::get("/admin/thesis", [BookController::class, 'addThesis']);
+Route::post("/admin/add-thesis", [BookController::class, "postThesis"]);
 
 Route::get("/admin/category", [BookController::class, "addCategory"]);
 Route::post("/admin/add-category", [BookController::class, "postCategory"]);
@@ -57,7 +62,9 @@ Route::get("/admin/returned/{id}", [TransactionController::class, "returned"]);
 Route::get("/admin/delete/account/{id}", [UserController::class, "deleteStudent"]);
 
 
-Route::get("/admin/book-list", [UserController::class, "showBookList"]);
+Route::get("/admin/book-list", [BookController::class, "showBookList"]);
+Route::get("/admin/journal-list", [BookController::class, "showJournalList"]);
+Route::get("/admin/thesis-list", [BookController::class, "showThesisList"]);
 
 
 Route::get("/admin/delete/transaction/{id}", [TransactionController::class, "deleteTransaction"]);

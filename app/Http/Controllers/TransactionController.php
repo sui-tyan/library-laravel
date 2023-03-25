@@ -53,6 +53,8 @@ class TransactionController extends Controller
         }
         
         $transaction->save();
+        $book=DB::table('books')->where('title', '=', $transaction->title)->update(['status' => 'Available']);
+
         return redirect("/admin/requested-list");
     }
 

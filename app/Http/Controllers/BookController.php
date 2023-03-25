@@ -51,7 +51,15 @@ class BookController extends Controller
 
     public function addBook(){
         $category=Category::all();
-        return view("admin.books", ['category'=>$category]);
+        return view("admin.books", ['category'=>$category])->with('link', 'book');
+    }
+    public function addJournal(){
+        $category=Category::all();
+        return view("admin.books", ['category'=>$category])->with('link', 'journal');
+    }
+    public function addThesis(){
+        $category=Category::all();
+        return view("admin.books", ['category'=>$category])->with('link', 'thesis');
     }
 
     public function postBook(Request $req){
@@ -77,6 +85,57 @@ class BookController extends Controller
         $book=Book::create($validated);
 
         return redirect("/admin/books")->with("saved", "Book saved!");
+
+    }
+
+    public function postJournal(Request $req){
+        $validated=$req->validate([
+            "issn"=>"required",
+            "title"=>"required",
+            "description"=>"required",
+            "author"=>"required",
+            "publisher"=>"required",
+            "price"=>"required",
+            "publishedDate"=>"required",
+            "categories"=>"required",
+            "type"=>"required",
+            "remarks"=>"required",
+        ]);
+
+        $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
+        $query=DB::table("categories")->where('category', $validated['categories'])->get();
+        $deweyDecimal = $query->pluck('deweyDecimal')->first();
+        $validated['deweyDecimal'] = $deweyDecimal;
+
+
+        $book=Book::create($validated);
+
+        return redirect("/admin/books")->with("saved", "Journal saved!");
+
+    }
+
+    public function postThesis(Request $req){
+        $validated=$req->validate([
+            "title"=>"required",
+            "description"=>"required",
+            "author"=>"required",
+            "publisher"=>"required",
+            "price"=>"required",
+            "publishedDate"=>"required",
+            "categories"=>"required",
+            "type"=>"required",
+            "remarks"=>"required",
+        ]);
+
+        $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
+        $query=DB::table("categories")->where('category', $validated['categories'])->get();
+        $deweyDecimal = $query->pluck('deweyDecimal')->first();
+        $validated['deweyDecimal'] = $deweyDecimal;
+
+
+        $book=Book::create($validated);
+
+        return redirect("/admin/books")->with("saved", "Thesis saved!");
 
     }
 
@@ -117,7 +176,19 @@ class BookController extends Controller
     public function editBook($id){
         $edit=Book::findOrFail($id);
         $category=Category::all();
-        return view("admin.edit-book", ["book"=>$edit, 'category'=>$category]);
+        if($edit->isbn == 'none' && $edit->issn == 'none'){
+
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'thesis');
+
+        } else if($edit->isbn != 'none' && $edit->issn == 'none'){
+
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'book');
+
+        } else if($edit->isbn == 'none' && $edit->issn != 'none'){
+
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'journal');
+
+        }
     }
     
     public function updateBook(Request $req){
@@ -153,5 +224,29 @@ class BookController extends Controller
         $book->save();
 
         return redirect("/admin/book-list")->with("saved", "Book saved!");
+    }
+    
+    public function showBookList(){
+        $books=DB::table('books')
+        ->where('isbn', '!=', 'none')
+        ->where('issn', '=', 'none')
+        ->get();
+        return view("admin.book-list", ["books"=>$books])->with('success', 'Books')->with('link', 'books');
+    }
+
+    public function showJournalList(){
+        $books=DB::table('books')
+        ->where('issn', '!=', 'none')
+        ->where('isbn', '=', 'none')
+        ->get();
+        return view("admin.book-list", ["books"=>$books])->with('success', 'Journals')->with('link', 'journals');
+    }
+
+    public function showThesisList(){
+        $books=DB::table('books')
+        ->where('issn', '=', 'none')
+        ->where('isbn', '=', 'none')
+        ->get();
+        return view("admin.book-list", ["books"=>$books])->with('success', 'Thesis')->with('link', 'thesis');
     }
 }

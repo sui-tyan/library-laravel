@@ -119,8 +119,9 @@
             </div>
           </div>
           @endif
-          <form method="POST" action="/admin/add-book">
+          <form method="POST" action="/admin/add-{{$link}}">
             @csrf
+            @if($link == 'book')
             <div class="relative z-0 w-full mb-6 group">
               <input type="text" name="isbn" id="isbn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
               <label for="isbn" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter ISBN</label>
@@ -157,7 +158,7 @@
               <div class="relative z-0 w-full mb-6 group">
                 <label for="underline_select" class="sr-only">Underline select</label>
                 <select id="underline_select" name="categories" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                  <option selected value="none">Select Category</option>
+                  <option selected>Select Category</option>
                   @foreach($category as $data)
                   <option value="{{$data->category}}">{{$data->category}}</option>
                   @endforeach
@@ -169,7 +170,7 @@
               <div class="relative z-0 w-11/12 mb-6 group">
                 <label for="underline_select" class="sr-only">Underline select</label>
                 <select id="underline_select" name="type" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                  <option selected value="Unknown">Select Type</option>
+                  <option selected>Select Type</option>
                   <option value="Fiction">Fiction</option>
                   <option value="Non-fiction">Non-fiction</option>
                   <option value="Unknown">Unknown</option>
@@ -185,6 +186,133 @@
                 </select>
               </div>
             </div>
+            @elseif($link == 'journal')
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="issn" id="issn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="issn" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter ISBN</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Title</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="description" id="description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="description" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Description</label>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="relative z-0 w-11/12 mb-6 group">
+                <input type="text" name="author" id="author" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="author" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Author</label>
+              </div>
+              <div class="relative z-0 w-full mb-6 group">
+                <input type="text" name="publisher" id="publisher" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="publisher" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Publisher</label>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="relative z-0 w-full mb-6 group">
+                <input type="number" name="price" id="price" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="price" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Price</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2">
+              <div class="relative w-11/12 mb-6">
+                <input datepicker type="text" name="publishedDate" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Published Date">
+              </div>
+              <div class="relative z-0 w-full mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="categories" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Category</option>
+                  @foreach($category as $data)
+                  <option value="{{$data->category}}">{{$data->category}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+
+              <div class="relative z-0 w-11/12 mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="type" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Type</option>
+                  <option value="Fiction">Fiction</option>
+                  <option value="Non-fiction">Non-fiction</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="relative z-0 w-full mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="remarks" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Remark</option>
+                  <option value="Good">Good</option>
+                  <option value="Lost">Lost</option>
+                </select>
+              </div>
+            </div>
+            @else
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Title</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input type="text" name="description" id="description" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="description" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Description</label>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="relative z-0 w-11/12 mb-6 group">
+                <input type="text" name="author" id="author" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="author" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Author</label>
+              </div>
+              <div class="relative z-0 w-full mb-6 group">
+                <input type="text" name="publisher" id="publisher" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="publisher" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Publisher</label>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="relative z-0 w-full mb-6 group">
+                <input type="number" name="price" id="price" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="price" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Price</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2">
+              <div class="relative w-11/12 mb-6">
+                <input datepicker type="text" name="publishedDate" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Published Date">
+              </div>
+              <div class="relative z-0 w-full mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="categories" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Category</option>
+                  @foreach($category as $data)
+                  <option value="{{$data->category}}">{{$data->category}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+
+              <div class="relative z-0 w-11/12 mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="type" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Type</option>
+                  <option value="Fiction">Fiction</option>
+                  <option value="Non-fiction">Non-fiction</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="relative z-0 w-full mb-6 group">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select id="underline_select" name="remarks" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                  <option selected>Select Remark</option>
+                  <option value="Good">Good</option>
+                  <option value="Lost">Lost</option>
+                </select>
+              </div>
+            </div>
+            @endif
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
           </form>
         </div>

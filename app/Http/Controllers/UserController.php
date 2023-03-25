@@ -186,12 +186,6 @@ class UserController extends Controller
         return redirect("/admin/borrowers")->with("deleted", "Account deleted!");
     }
 
-    public function showBookList(){
-        $books=DB::table('books')
-        ->where('isbn', '!=', 'none')
-        ->get();
-        return view("admin.book-list", ["books"=>$books]);
-    }
 
     
 }
