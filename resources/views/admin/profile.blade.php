@@ -1,5 +1,3 @@
-@include('partials.header')
-
 @include("partials.header");
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="bg-white border-b border-gray-200 fixed z-30 w-full top-0">
@@ -253,59 +251,108 @@
     </div>
   </aside>
   <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
-
-
-
   <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
     <main>
       <div class="py-6 px-4">
-
-
-        <div class="w-1/2 mx-auto border p-5 rounded-md my-5">
-          <form method="POST" action="/addStaff">
-            @csrf
-            <div class="grid grid-cols-3 md:gap-6">
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="firstName" id="firstName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="firstName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name</label>
-              </div>
-
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="middleName" id="middleName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="middleName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Middle Name</label>
-              </div>
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="lastName" id="lastName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="lastName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name</label>
-              </div>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <label for="underline_select" class="sr-only">Underline select</label>
-              <select id="underline_select" name="account_type" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                <option selected>Account Type</option>
-                <option value="admin">Administrator</option>
-                <option value="librarian">Librarian</option>
-              </select>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-            </div>
-
-
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-          </form>
+        <div class="mb-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         </div>
+        <div class="w-full ">
+          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+            @if(Session::has("updated"))
+            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+              <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="sr-only">Info</span>
+              <div>
+                <span class="font-medium">{{Session::get('updated')}}</span>
+              </div>
+            </div>
+            @endif
+            <form method="POST" action="/admin/udpate/student/profile">
+              @csrf
+              <div class="grid w-3/4 mx-auto grid-cols-1 lg:grid-cols-2 mb-5">
+                <div class="profile mt-2 p-10">
+                  <div class="image-container border rounded-md w-full lg:w-9/12 p-10">
+                    <img src="{{url('/images/user.png')}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
+                    <input type="file" name="profile-image" id="">
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                      <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Change Password</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="profile-details">
+                  <h2 class="text-2xl font-semibold text-center lg:text-left m-5 lg:ml-0">Account Details</h2>
+                  <input type="hidden" value="{{$user->id}}" name="id">
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="studentID" id="studentID" value="{{$user->studentID}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="studentID" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student ID</label>
+                  </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="firstName" id="firstName" value="{{$user->firstName}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="firstName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name</label>
+                  </div>
 
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="middleName" id="middleName" value="{{$user->middleName}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="middleName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Middle Name</label>
+                  </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="lastName" id="lastName" value="{{$user->lastName}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="lastName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name</label>
+                  </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="address" id="address" value="{{$user->address}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="address" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
+                  </div>
 
+                  <div class="relative z-0 w-full mb-6 group">
+                    <h4 class="text-sm text-gray-500 py-2.5">Gender</h4>
+                    <div class="flex">
+                      <div class="flex items-center mr-4">
+                        @if($user->gender === "Male")
+                        <input id="gender" type="radio" value="Male" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" checked>
+                        <label for="gender" class="ml-2 text-sm font-medium text-gray-900">Male</label>
+                        @else
+                        <input id="gender" type="radio" value="Male" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                        <label for="gender" class="ml-2 text-sm font-medium text-gray-900">Male</label>
+                        @endif
+                      </div>
+                      <div class="flex items-center mr-4">
+                        @if($user->gender === "Female")
+                        <input id="gender" type="radio" value="Female" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" checked>
+                        <label for="gender" class="ml-2 text-sm font-medium text-gray-900">Female</label>
+                        @else
+                        <input id="gender" type="radio" value="Female" name="gender" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                        <label for="gender" class="ml-2 text-sm font-medium text-gray-900">Female</label>
+                        @endif
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="contactNumber" id="contactNumber" value="{{$user->contactNumber}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="contactNumber" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contact No.</label>
+                  </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="courseAndYear" id="courseAndYear" value="{{$user->courseAndYear}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="courseAndYear" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Course and Year</label>
+                  </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="department" id="department" value="{{$user->department}}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="department" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Department</label>
+                  </div>
+                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+            </form>
+
+          </div>
+        </div>
       </div>
-    </main>
   </div>
+</div>
+</main>
+</div>
 </div>
 <script type="text/javascript" src="{{ URL::asset('js/datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/dropdown.js') }}"></script>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date("dateBorrowed");
             $table->date("dueDate");
             $table->string("status");
+            $table->string("purpose");
             $table->date("dateReturned")->nullable();
             $table->string("remarks")->default("ongoing");
             $table->timestamps();

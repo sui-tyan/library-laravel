@@ -8,18 +8,24 @@ use App\Models\Book;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class BookController extends Controller
 {
     //
     
     public function books(){
-        return view("user.books");
+        
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("user.books", ['notifications'=>$notifications]);
     }
 
     public function findBooks(){
         $category=Category::all();
-        return view("user.find-books", ["category"=>$category]);
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("user.find-books", ["category"=>$category, 'notifications'=>$notifications]);
     }
 
     public function queryBook(Request $req){
@@ -44,22 +50,31 @@ class BookController extends Controller
         ->orWhere('publishedDate', $validated['publishedDate'])
         ->get();
         
-        return view("user.found-books", ['books'=>$queryResult]);
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("user.found-books", ['books'=>$queryResult, 'notifications'=>$notifications]);
 
         
     }
 
     public function addBook(){
         $category=Category::all();
-        return view("admin.books", ['category'=>$category])->with('link', 'book');
+        
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.books", ['category'=>$category, 'notifications'=>$notifications])->with('link', 'book');
     }
     public function addJournal(){
         $category=Category::all();
-        return view("admin.books", ['category'=>$category])->with('link', 'journal');
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.books", ['category'=>$category, 'notifications'=>$notifications])->with('link', 'journal');
     }
     public function addThesis(){
         $category=Category::all();
-        return view("admin.books", ['category'=>$category])->with('link', 'thesis');
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.books", ['category'=>$category, 'notifications'=>$notifications])->with('link', 'thesis');
     }
 
     public function postBook(Request $req){
@@ -141,7 +156,10 @@ class BookController extends Controller
 
     public function addCategory(){
         $category=Category::all();
-        return view("admin.category", ['category'=>$category]);
+        
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.category", ['category'=>$category, 'notifications'=>$notifications]);
     }
 
     public function postCategory(Request $req){
@@ -158,14 +176,19 @@ class BookController extends Controller
     public function showBook($id){
         $book=Book::findOrFail($id);
         $categories=Category::all();
-        return view("user.show-book", ['book'=>$book, 'categories'=>$categories]);
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("user.show-book", ['book'=>$book, 'categories'=>$categories, 'notifications'=>$notifications]);
     }
 
     public function showCategories($id){
         $categories=Category::all();
         $selectedCategory=Category::findOrFail($id);
         $showBooks=Book::where('categories', $selectedCategory->category)->get();
-        return view("user.show-categories", ['showBooks'=>$showBooks, 'showCategories'=>$categories]);
+        
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("user.show-categories", ['showBooks'=>$showBooks, 'showCategories'=>$categories, 'notifications'=>$notifications]);
     }
 
     public function deleteBook($id){
@@ -176,17 +199,20 @@ class BookController extends Controller
     public function editBook($id){
         $edit=Book::findOrFail($id);
         $category=Category::all();
+        
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         if($edit->isbn == 'none' && $edit->issn == 'none'){
 
-            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'thesis');
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category, 'notifications'=>$notifications])->with('link', 'thesis');
 
         } else if($edit->isbn != 'none' && $edit->issn == 'none'){
 
-            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'book');
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category, 'notifications'=>$notifications])->with('link', 'book');
 
         } else if($edit->isbn == 'none' && $edit->issn != 'none'){
 
-            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category])->with('link', 'journal');
+            return view("admin.edit-book", ["book"=>$edit, 'category'=>$category, 'notifications'=>$notifications])->with('link', 'journal');
 
         }
     }
@@ -231,7 +257,9 @@ class BookController extends Controller
         ->where('isbn', '!=', 'none')
         ->where('issn', '=', 'none')
         ->get();
-        return view("admin.book-list", ["books"=>$books])->with('success', 'Books')->with('link', 'books');
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, "notifications"=>$notifications])->with('success', 'Books')->with('link', 'books');
     }
 
     public function showJournalList(){
@@ -239,7 +267,9 @@ class BookController extends Controller
         ->where('issn', '!=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        return view("admin.book-list", ["books"=>$books])->with('success', 'Journals')->with('link', 'journals');
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Journals')->with('link', 'journals');
     }
 
     public function showThesisList(){
@@ -247,6 +277,8 @@ class BookController extends Controller
         ->where('issn', '=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        return view("admin.book-list", ["books"=>$books])->with('success', 'Thesis')->with('link', 'thesis');
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Thesis')->with('link', 'thesis');
     }
 }

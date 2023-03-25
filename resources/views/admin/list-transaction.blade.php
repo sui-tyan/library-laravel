@@ -1,5 +1,3 @@
-@include('partials.header')
-
 @include("partials.header");
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="bg-white border-b border-gray-200 fixed z-30 w-full top-0">
@@ -230,12 +228,12 @@
             </li>
             <li>
             <li>
-              <a href="#" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+              <a href="/admin/list-of-transactions" class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
                 </svg>
 
-                <span class="ml-3 flex-1 whitespace-nowrap">Transaction</span>
+                <span class="ml-3 flex-1 whitespace-nowrap">Transactions</span>
               </a>
             </li>
           </ul>
@@ -253,56 +251,130 @@
     </div>
   </aside>
   <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
-
-
-
   <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
     <main>
       <div class="py-6 px-4">
+        <div class="w-full ">
+          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
 
-
-        <div class="w-1/2 mx-auto border p-5 rounded-md my-5">
-          <form method="POST" action="/addStaff">
-            @csrf
-            <div class="grid grid-cols-3 md:gap-6">
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="firstName" id="firstName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="firstName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name</label>
+            <div class="mb-4 flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Transaction History</h3>
               </div>
+              <form action="/admin/filter/list-of-transactions" method="post">
+                @csrf
+                <div date-rangepicker class="flex items-center">
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                  </div>
+                  <span class="mx-4 text-gray-500">to</span>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                  </div><button type="submit" class="ml-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+                </div>
+              </form>
 
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="middleName" id="middleName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="middleName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Middle Name</label>
+            </div>
+
+            <div class="flex flex-col mt-8">
+              <div class="overflow-x-auto rounded-lg">
+                <div class="align-middle inline-block min-w-full">
+                  <div class="shadow overflow-hidden sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            ISBN/ISSN
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Title
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Category
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Borrower
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Purpose
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Date Borrowed
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Due Date
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Date Returned
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Remarks
+                          </th>
+                          <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-gray-50 border">
+                        @foreach($transactions as $transaction)
+                        <tr class="border whitespace-nowrap text-sm font-semibold text-gray-900">
+
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            @if($transaction->isbn == 'none' && $transaction->issn == 'none')
+                            N/A
+                            @elseif($transaction->isbn != "none")
+                            {{$transaction->isbn}}
+                            @else if($transaction->issn != 'none')
+                            {{$transaction->issn}}
+                            @endif
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->title}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                            {{$transaction->categories}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->borrower}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->purpose}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->dateBorrowed}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->dueDate}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->dateReturned}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->remarks}}
+                          </td>
+                          <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                            {{$transaction->status}}
+                          </td>
+                          @endforeach
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-              <div class="relative z-0 w-11/12 mb-6 group">
-                <input type="text" name="lastName" id="lastName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="lastName" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name</label>
-              </div>
             </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <label for="underline_select" class="sr-only">Underline select</label>
-              <select id="underline_select" name="account_type" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                <option selected>Account Type</option>
-                <option value="admin">Administrator</option>
-                <option value="librarian">Librarian</option>
-              </select>
-            </div>
-            <div class="relative z-0 w-full mb-6 group">
-              <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-              <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-            </div>
-
-
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-          </form>
+          </div>
         </div>
-
-
-
       </div>
     </main>
   </div>

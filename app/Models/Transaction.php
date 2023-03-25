@@ -18,6 +18,7 @@ class Transaction extends Model
         'dateBorrowed',
         'dueDate',
         'status',
+        'purpose',
         'dateReturned',
         'remarks',
     ];
