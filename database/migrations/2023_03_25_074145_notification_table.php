@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('borrowedBookID');
             $table->string('borrowedContent');
             $table->integer('isSeen')->default(0);
+            $table->integer('isSeenStudent')->default(0);
             $table->timestamps();
         });
 

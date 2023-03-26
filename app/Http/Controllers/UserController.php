@@ -19,7 +19,8 @@ use \PDF;
 class UserController extends Controller
 {
     public function home(){
-        return view("welcome");
+        $notifications=DB::table('notifications')->where('isSeenStudent', '=', 0)->get();
+        return view("welcome", ['notifications'=>$notifications]);
     }
 
     public function login(){
@@ -72,7 +73,8 @@ class UserController extends Controller
 
     public function showProfile(){
         $data = Auth::user();
-        return view("user.profile", ['user'=>$data]);
+        $notifications=DB::table('notifications')->where('isSeenStudent', '=', 0)->get();
+        return view("user.profile", ['user'=>$data, 'notifications'=>$notifications]);
     }
 
     public function logout(Request $req){
@@ -200,6 +202,7 @@ class UserController extends Controller
                 'borrowedBookID' => $statusBook->id,
                 'borrowedContent' => $contentType,
                 'isSeen' => 0,
+                'isSeenStudent' => 0,
             ]);
             $book=DB::table('books')
             ->where('title', '=', $req->title)
@@ -540,7 +543,8 @@ class UserController extends Controller
     public function showUserTransactions($id){
         $user=User::findOrFail($id);
         $transactions = DB::table('transactions')->where('borrowerID', '=', $user->studentID)->get();
-        return view("user.transaction-history", ['transactions'=>$transactions]);
+        $notifications=DB::table('notifications')->where('isSeenStudent', '=', 0)->get();
+        return view("user.transaction-history", ['transactions'=>$transactions, 'notifications'=>$notifications]);
     }
     
 }

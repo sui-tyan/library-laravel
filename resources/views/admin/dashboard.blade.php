@@ -244,7 +244,72 @@
   <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
   <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
     <main>
+
       <div class="py-6 px-4">
+        <div class="w-full">
+          <div class="bg-white shadow rounded-lg p-4 mb-5 sm:p-6 xl:p-8 ">
+
+            <div class="mb-4 flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Available to borrow</h3>
+              </div>
+              <form method="post" action="/admin/available/search">
+                @csrf
+                <div class="flex justify-end">
+
+                  <div class="relative z-0 group ">
+                    <input type="text" name="search" id="search" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                    <label for="search" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Search</label>
+
+                  </div>
+                  <button type="submit" class="ml-5 mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
+
+              </form>
+              <div class="flex items-center">
+                <a href="/admin/export/available-csv" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table</a>
+                <a href="/admin/export/available-pdf" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table as PDF</a>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col mt-8">
+            <div class="overflow-x-auto rounded-lg">
+              <div class="align-middle inline-block min-w-full">
+                <div class="shadow overflow-hidden sm:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Title
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Description
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Category
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-gray-50 border">
+                      @foreach($books as $book)
+                      <tr class="border">
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->title}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                          {{Illuminate\Support\Str::limit($book->description, 100) }}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->categories}}
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="mb-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
           <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
             <div class="flex items-center">
