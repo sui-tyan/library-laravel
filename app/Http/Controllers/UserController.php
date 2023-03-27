@@ -32,10 +32,12 @@ class UserController extends Controller
     }
 
     public function adminAuthenticate(Request $req){
+        // dd($req);
         $validated=$req->validate([
             'name'=>'required',
             'password'=>'required',
         ]);
+        // dd($validated);
 
         if(auth()->attempt($validated)){
             $user=DB::table('users')->where('name', '=', $req->name)->first();
@@ -50,7 +52,7 @@ class UserController extends Controller
                 return redirect("/admin/login")->with("fail", "Wrong credentials!");
             }
         } else {
-            return redirect("/admin/login");
+            return redirect("/admin/login")->with("fail", "Ewewew");
         }
 
         
@@ -154,7 +156,8 @@ class UserController extends Controller
         $book=Book::findOrFail($id);
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("user.borrow", ['book'=>$book, 'user'=>$data, 'notifications'=>$notifications]);
+        $departments=Department::all();
+        return view("user.borrow", ['book'=>$book, 'user'=>$data, 'notifications'=>$notifications, 'departments'=>$departments]);
     }
 
     public function createTransaction(Request $req){
@@ -165,16 +168,26 @@ class UserController extends Controller
         $validated=$req->validate([
             "isbn" => "nullable",
             "issn" => "nullable",
+            "bookID"=>"required",
             "title" => "required",
             "categories" => "required",
             "borrowerID" => "required",
             "borrower" => "required",
+            'borrowerAddress' => 'required',
+            'borrowerContactNumber' => 'required',
+            'borrowerCourseAndYear' => 'required',
+            'borrowerDepartment' => 'required',
+            'librarian' => 'required',
             "dateBorrowed" => "required",
             "dueDate" => "required",
             "status" => "required",
         ]);
+
+
+        
         $validated['purpose'] = "1 day";
 
+        // dd($validated);
         
         $statusBook=DB::table('books')
         ->where('title', '=', $req->title)->first();
@@ -194,10 +207,22 @@ class UserController extends Controller
 
             $student = DB::table('users')->where('studentID', '=', $req->borrowerID)->first();
 
+            $name = $validated['borrower'];
+
+            if($student != null){
+                
+            if($student->firstName == null){
+                $name = $validated['borrower'];
+    
+                } else {
+                    $name = $student->firstName;
+                }
+            }
+
             
             Notification::create([
                 'studentID' => $req->borrowerID,
-                'borrowerName' => $student->firstName,
+                'borrowerName' => $name,
                 'borrowedBookTitle' => $req->title,
                 'borrowedBookID' => $statusBook->id,
                 'borrowedContent' => $contentType,
@@ -443,6 +468,8 @@ class UserController extends Controller
 
     public function updateStaff(Request $req){
 
+
+
         $validated=$req->validate([
             'firstName'=>'required',
             'middleName'=>'required',
@@ -451,10 +478,19 @@ class UserController extends Controller
             'account_type'=>'required',
         ]);
 
+        // dd($req->profileImage);
+
         $user = User::find($req->id);
         if($req->password != null){
             $validated['password']=Hash::make($req['password']);
             $user->password = $validated['password'];
+        }
+        
+        if($req->profileImage != null){
+            $imageName = time().'.'.$req->profileImage->extension();  
+ 
+            $req->profileImage->move(public_path('users'), $imageName);     
+            $user->profileImage = '/'.'users/' . $imageName;
         }
         $user->firstName = $validated['firstName'];
         $user->middleName = $validated['middleName'];
@@ -547,4 +583,61 @@ class UserController extends Controller
         return view("user.transaction-history", ['transactions'=>$transactions, 'notifications'=>$notifications]);
     }
     
+    public function viewBookBorrowed($id){
+        $book=Book::findOrFail($id);
+        $transaction=DB::table('transactions')->where('bookID', $id)->first();
+        $notifications=DB::table('notifications')->where('isSeenStudent', '=', 0)->get();
+        return view("user.view-book", ['book'=>$book, 'notifications'=>$notifications, 'transaction'=>$transaction]);
+    }
+
+    public function updateStudentProfile(Request $req){
+
+        
+
+        // dd($req);
+        $validated=$req->validate([
+            'id'=>'required',
+            'studentID'=>'required',
+            'firstName'=>'required',
+            'middleName'=>'required',
+            'lastName'=>'required',
+            'address'=>'required',
+            'gender'=>'required',
+            'contactNumber'=>'required',
+            'courseAndYear'=>'required',
+            'department'=>'required',
+        ]);
+        // dd($validated);
+
+
+
+        $student = User::find($req->id);
+
+        if($req->password != null){
+            $validated['password']=Hash::make($req['password']);
+            $student->password = $validated['password'];
+        }
+        if($req->profileImage != null){
+            $imageName = time().'.'.$req->profileImage->extension();  
+ 
+            $req->profileImage->move(public_path('users'), $imageName);     
+            $student->profileImage = '/'.'users/' . $imageName;
+        }
+
+        $student->studentID = $validated['studentID'];
+        $student->firstName = $validated['firstName'];
+        $student->middleName = $validated['middleName'];
+        $student->lastName = $validated['lastName'];
+        $student->address = $validated['address'];
+        $student->gender = $validated['gender'];
+        $student->contactNumber = $validated['contactNumber'];
+        $student->courseAndYear = $validated['courseAndYear'];
+        $student->department = $validated['department'];
+
+        $student->save();
+
+        return redirect("/profile")->with("saved", "Profile updated!");
+
+
+    }
 }

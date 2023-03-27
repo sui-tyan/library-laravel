@@ -15,4 +15,11 @@ class NotificationController extends Controller
         $seen->save();
         return redirect("/admin/requested-list");
     }
+
+    public function studentSeen($id){
+        $seen=Notification::findOrFail($id);
+        $seen->isSeenStudent = 1;
+        $seen->save();
+        return redirect("/view-book/".$seen->borrowedBookID);
+    }
 }

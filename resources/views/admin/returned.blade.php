@@ -334,6 +334,9 @@
                           Due Date
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Librarian
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -370,6 +373,9 @@
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->dueDate}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->librarian}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->status}}

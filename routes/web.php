@@ -60,6 +60,7 @@ Route::group(['middleware' => ['admin']], function(){
     
     Route::get("/admin/profile/{id}", [UserController::class, "showAdminProfile"]);
     Route::post("/admin/update/student/profile", [UserController::class, 'updateStudent']);
+    Route::post("/admin/udpate/staff/profile", [UserController::class, 'updateStaff']);
 
     Route::get("/admin/list-of-transactions", [UserController::class, "showListTransaction"]);
     Route::post("/admin/filter/list-of-transactions", [UserController::class, "filterListTransaction"]);
@@ -105,7 +106,10 @@ Route::post("/create-transaction", [UserController::class, "createTransaction"])
 Route::get("/list/transaction/{id}", [UserController::class, "showUserTransactions"]);
 
 
+Route::get("/seen/notif/{id}", [NotificationController::class, "studentSeen"]);
+Route::get("/view-book/{id}", [UserController::class, "viewBookBorrowed"]);
 
+Route::post("/updateProfile",  [UserController::class, "updateStudentProfile"]);
 Route::post("/authenticate", [UserController::class, "authenticate"]);
 
 

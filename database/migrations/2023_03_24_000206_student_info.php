@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contactNumber')->default("none");
             $table->string('courseAndYear')->default("none");
             $table->string('department')->default("none");
+            $table->string('profileImage')->default("/users/user.png");
         });
     }
 
@@ -42,6 +43,7 @@ return new class extends Migration
             $table->dropColumn('contactNumber');
             $table->dropColumn('courseAndYear');
             $table->dropColumn('department');
+            $table->dropColumn('profileImage');
         });
     }
 };

@@ -260,13 +260,13 @@
               </div>
             </div>
             @endif
-            <form method="POST" action="/admin/update/staff/profile">
+            <form method="POST" action="/admin/update/staff/profile" enctype="multipart/form-data">
               @csrf
               <div class="grid w-3/4 mx-auto grid-cols-1 lg:grid-cols-2 mb-5">
                 <div class="profile mt-2 p-10">
                   <div class="image-container border rounded-md w-full lg:w-9/12 p-10">
-                    <img src="{{url('/images/user.png')}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
-                    <input type="file" name="profile-image" id="">
+                    <img src="{{url( $staff->profileImage )}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
+                    <input type="file" name="profileImage" id="">
                   </div>
                 </div>
                 <div class="profile-details">

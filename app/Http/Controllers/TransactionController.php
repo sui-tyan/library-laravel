@@ -24,8 +24,10 @@ class TransactionController extends Controller
     }
 
     public function claimed($id){
+        $currentStaff = auth()->user();
         $transaction=Transaction::find($id);
         $transaction->status = "claimed";
+        $transaction->librarian = $currentStaff->lastName . ", " . $currentStaff->firstName;
         $transaction->save();
         return redirect("/admin/requested-list");
     }

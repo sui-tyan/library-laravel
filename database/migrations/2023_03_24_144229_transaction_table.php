@@ -18,8 +18,14 @@ return new class extends Migration
             $table->string("issn")->default("none");
             $table->text("title");
             $table->string("categories");
+            $table->integer("bookID");
             $table->string("borrowerID");
             $table->string("borrower");
+            $table->string("borrowerAddress");
+            $table->string("borrowerContactNumber");
+            $table->string("borrowerCourseAndYear");
+            $table->string("borrowerDepartment");
+            $table->string("librarian")->default("none-assigned");
             $table->date("dateBorrowed");
             $table->date("dueDate");
             $table->string("status");

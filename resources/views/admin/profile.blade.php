@@ -260,13 +260,13 @@
               </div>
             </div>
             @endif
-            <form method="POST" action="/admin/udpate/student/profile">
+            <form method="POST" action="/admin/udpate/student/profile" enctype="multipart/form-data">
               @csrf
               <div class="grid w-3/4 mx-auto grid-cols-1 lg:grid-cols-2 mb-5">
                 <div class="profile mt-2 p-10">
                   <div class="image-container border rounded-md w-full lg:w-9/12 p-10">
-                    <img src="{{url('/images/user.png')}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
-                    <input type="file" name="profile-image" id="">
+                    <img src="{{url( $user->profileImage )}}" style="width: 100px" class="rounded-full mx-auto my-5" alt="profile image">
+                    <input type="file" name="profileImage" id="">
                     <div class="relative z-0 w-full mb-6 group">
                       <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                       <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Change Password</label>
