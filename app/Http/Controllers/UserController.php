@@ -547,4 +547,16 @@ class UserController extends Controller
         return view("user.transaction-history", ['transactions'=>$transactions, 'notifications'=>$notifications]);
     }
     
+
+    public function booksBorrowersGraph() {
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications]);
+    }
+
+    public function departmentGraph() {
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.departmentGraph", ["books"=>$books, "notifications"=>$notifications]);
+    }
 }
