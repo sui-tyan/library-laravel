@@ -86,6 +86,8 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/admin/export/available-csv', [UserController::class, "exportAvailableCsv"]);
     Route::get('/admin/export/available-pdf', [UserController::class, "exportAvailablePdf"]);
 
+    Route::get('/admin/books-and-borrowers', [UserController::class, "booksBorrowersGraph"]);
+    Route::get('/admin/department-graph', [UserController::class, "departmentGraph"]);
 });
 
 

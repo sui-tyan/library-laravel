@@ -113,7 +113,7 @@
 </nav>
 
 <!-- Hero section -->
-<section class="bg-whitebg-no-repeat h-[75vh] bg-cover h-screen" style="background-image: url({{url('/images/UPang.jpg')}})">
+<section class="bg-whitebg-no-repeat h-[75vh] bg-cover" style="background-image:url('/images/UPang.jpg')">
   <div class="h-full w-full flex justify-center items-center bg-black bg-opacity-70">
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
       <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">PHINMA-UPANG COLLEGE OF URDANETA</h1>
@@ -121,6 +121,30 @@
       <p class="mb-8 text-4xl font-normal text-white lg:text-xl sm:px-16 xl:px-48">Explore and Borrow in our University Library</p>
     </div>
   </div>
+</section>
+
+<!-- Featured List -->
+<section class="bg-white h-[100vh] my-16">
+  <div class="container text-center">
+    <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">Featured Lists</h1>
+    <p class="mb-8 text-4xl font-normal text-black lg:text-xl sm:px-16 xl:px-48">Available in Library</p>
+  </div>
+
+  <div class="container">
+    <div class="flex flex-wrap gap-5 justify-center items-center text-center">
+      <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 flex justify-center mb-5 lg:mb-0" onclick="(location.href='')">
+        <div class="icon-box">
+          <h4 class="title"><a href="">HEI Researchers</a></h4>
+          <div class="icon">
+            <img src="./assets/img/database/hei-researchers.png" alt="">
+          </div>
+          <p class="description">Click to View</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </section>
 
 @include('partials.footer')
