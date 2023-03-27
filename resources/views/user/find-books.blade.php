@@ -125,7 +125,6 @@
       <label for="underline_select" class="sr-only">Underline select</label>
       <select id="underline_select" name="categories" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
         <option selected>Select Category</option>
-        <option value="any">Any</option>
         @foreach($category as $data)
         <option value="{{$data->category}}">{{$data->category}}</option>
         @endforeach

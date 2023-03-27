@@ -111,7 +111,7 @@
     </div>
   </div>
 </nav>
-<div class="grid w-3/4 mx-auto grid-cols-1 mb-5">
+<div class="grid w-3/4 mx-auto grid-cols-1 mb-20">
   <div class="profile-details">
     <h2 class="text-2xl font-semibold text-center lg:text-left m-5 lg:ml-0">Transaction History</h2>
     <div class="flex flex-col mt-8">
@@ -135,6 +135,9 @@
                   </th>
                   <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Purpose
+                  </th>
+                  <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Price
                   </th>
                   <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Date Borrowed
@@ -162,7 +165,7 @@
                     N/A
                     @elseif($transaction->isbn != "none")
                     {{$transaction->isbn}}
-                    @else if($transaction->issn != 'none')
+                    @elseif($transaction->issn != 'none')
                     {{$transaction->issn}}
                     @endif
                   </td>
@@ -177,6 +180,9 @@
                   </td>
                   <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                     {{$transaction->purpose}}
+                  </td>
+                  <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                    {{$transaction->bookPrice}}
                   </td>
                   <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                     {{$transaction->dateBorrowed}}

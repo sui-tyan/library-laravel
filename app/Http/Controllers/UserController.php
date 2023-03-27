@@ -52,7 +52,7 @@ class UserController extends Controller
                 return redirect("/admin/login")->with("fail", "Wrong credentials!");
             }
         } else {
-            return redirect("/admin/login")->with("fail", "Ewewew");
+            return redirect("/admin/login")->with("fail", "Wrong credentials!");
         }
 
         
@@ -69,7 +69,7 @@ class UserController extends Controller
             $req->session()->regenerate();
             return redirect("/");
         } else {
-            return redirect("/login");
+            return redirect("/login")->with("fail", "Wrong credentials!");
         }
     }
 
@@ -96,7 +96,6 @@ class UserController extends Controller
 
     public function addStudent(Request $req){
         $validated=$req->validate([
-            "name" => "required",
             "email" => "required",
             "studentID" => "required",
             "firstName" => "required",
@@ -109,6 +108,7 @@ class UserController extends Controller
             "department" => "required",
             "password" => "required",
        ]);
+       $validated['name']="none";
        $validated['password']=Hash::make($validated['password']);
        $user=User::create($validated);
 
@@ -178,6 +178,7 @@ class UserController extends Controller
             'borrowerCourseAndYear' => 'required',
             'borrowerDepartment' => 'required',
             'librarian' => 'required',
+            'bookPrice'=>'required',
             "dateBorrowed" => "required",
             "dueDate" => "required",
             "status" => "required",
@@ -197,9 +198,9 @@ class UserController extends Controller
         }else {
             $contentType = "none";
 
-            if($req->isbn == 'none' && $req->issn != 'none'){
+            if($req->isbn != 'none' && $req->issn == 'none'){
                 $contentType = "Book";
-            }else if($req->isbn != 'none' && $req->issn == 'none'){
+            }else if($req->isbn == 'none' && $req->issn != 'none'){
                 $contentType = "Journal";
             } else {
                 $contentType = "Thesis";
@@ -380,7 +381,7 @@ class UserController extends Controller
         $validated=$req->validate([
             'search'=>'required'
         ]);
-        $transactions=DB::table('transactions')->where('title', '=', $req['search'])->get();
+        $transactions=DB::table('transactions')->where('borrower', '=', $req['search'])->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.list-transaction", ['transactions'=>$transactions, 'notifications'=>$notifications]);
 
@@ -455,7 +456,7 @@ class UserController extends Controller
 
     public function showStaffList(){
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        $users=DB::table('users')->where('account_type', '=', 'admin')->orWhere('account_type', '=', "staff")->get();
+        $users=DB::table('users')->where('account_type', '=', 'admin')->orWhere('account_type', '=', "librarian")->get();
         return view("admin.staff-list", ['notifications'=>$notifications, 'users'=>$users])->with('link', 'books');
     }
 
@@ -639,5 +640,48 @@ class UserController extends Controller
         return redirect("/profile")->with("saved", "Profile updated!");
 
 
+    }
+
+    public function booksAndBorrowersMonthly(){
+        $books = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            ->groupBy('month')
+            ->get();
+
+        $booksMonthly = $books->pluck('month')->toJson();
+
+        // $books = Transaction::all(); //all books
+        // $borrower = DB::table('transactions')->select('borrowerID')->distinct()->get(); //all unique borrowers
+    //     $borrower = DB::table('transactions')
+    // ->select('borrowerID')
+    // ->whereMonth('created_at', date('m'))
+    // ->whereYear('created_at', date('Y'))
+    // ->distinct()
+    // ->get();
+        // dd($booksMonthly);
+
+        $borrower = DB::table('transactions')
+                ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+                ->groupBy('month')
+                ->get()->toArray();
+        dd($borrower);
+    }
+
+    public function departmentMonthly(){
+        $shs = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->get();
+        $cas = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->get();
+        $cea = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->get();
+        $cma = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->get();
+        $cela = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->get();
+        $chs = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->get();
+        // $cite = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->get();
+        $ccje = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->get();
+
+        $cite = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            ->groupBy('month')
+            ->get();
+
+        $citeMonth = $cite->pluck('month')->toJson(); //[3, 4]
+        $citeUsers = $cite->pluck('total')->toJson(); //[2, 1]
+        dd($citeUsers);
     }
 }

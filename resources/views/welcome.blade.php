@@ -113,7 +113,7 @@
 </nav>
 
 <!-- Hero section -->
-<section class="bg-whitebg-no-repeat h-[75vh] bg-cover" style="background-image: url({{url('/images/UPang.jpg')}})">
+<section class="bg-whitebg-no-repeat h-[75vh] bg-cover h-screen" style="background-image: url({{url('/images/UPang.jpg')}})">
   <div class="h-full w-full flex justify-center items-center bg-black bg-opacity-70">
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
       <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">PHINMA-UPANG COLLEGE OF URDANETA</h1>

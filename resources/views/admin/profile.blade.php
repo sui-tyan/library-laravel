@@ -260,7 +260,7 @@
               </div>
             </div>
             @endif
-            <form method="POST" action="/admin/udpate/student/profile" enctype="multipart/form-data">
+            <form method="POST" action="/admin/update/student/profile" enctype="multipart/form-data">
               @csrf
               <div class="grid w-3/4 mx-auto grid-cols-1 lg:grid-cols-2 mb-5">
                 <div class="profile mt-2 p-10">

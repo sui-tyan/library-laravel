@@ -16,9 +16,10 @@ class BookController extends Controller
     
     public function books(){
         
+        $category=Category::all();
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("user.books", ['notifications'=>$notifications]);
+        return view("user.books", ['categories'=>$category, 'books'=>$books, 'notifications'=>$notifications]);
     }
 
     public function findBooks(){
@@ -41,7 +42,23 @@ class BookController extends Controller
         if($validated['publishedDate'] != null){
             $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
         }
+        if($validated['categories'] == 'any') {
 
+            
+            $queryResult=DB::table('books')
+            ->where('title', $validated['title'])
+            ->orWhere('categories', $validated['categories'])
+            ->orWhere('author', $validated['author'])
+            ->orWhere('publisher', $validated['publisher'])
+            ->orWhere('publishedDate', $validated['publishedDate'])
+            ->get();
+            $books=DB::table('books')->where('status', '=', 'Available')->get();
+            $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+            return view("user.found-books", ['books'=>$queryResult, 'notifications'=>$notifications]);
+
+
+        } else {
+            
         $queryResult=DB::table('books')
         ->where('title', $validated['title'])
         ->orWhere('categories', $validated['categories'])
@@ -49,10 +66,13 @@ class BookController extends Controller
         ->orWhere('publisher', $validated['publisher'])
         ->orWhere('publishedDate', $validated['publishedDate'])
         ->get();
-        
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("user.found-books", ['books'=>$queryResult, 'notifications'=>$notifications]);
+        }
+
+
+        
 
         
     }
@@ -125,7 +145,7 @@ class BookController extends Controller
 
         $book=Book::create($validated);
 
-        return redirect("/admin/books")->with("saved", "Journal saved!");
+        return redirect("/admin/journals")->with("saved", "Journal saved!");
 
     }
 
@@ -150,7 +170,7 @@ class BookController extends Controller
 
         $book=Book::create($validated);
 
-        return redirect("/admin/books")->with("saved", "Thesis saved!");
+        return redirect("/admin/thesis")->with("saved", "Thesis saved!");
 
     }
 
@@ -163,10 +183,12 @@ class BookController extends Controller
     }
 
     public function postCategory(Request $req){
+        // dd($req);
         $validated=$req->validate([
             "category"=>"required",
-            "deweyDecimal"=>"required",
         ]);
+        
+       $validated['deweyDecimal']="0";
 
         $category=Category::create($validated);
         
@@ -235,8 +257,15 @@ class BookController extends Controller
         $query=DB::table("categories")->where('category', $validated['categories'])->get();
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
         $validated['deweyDecimal'] = $deweyDecimal;
+        
+        
 
         $book=Book::find($req->id);
+        if($book->remarks == 'Lost'){
+            $book->status = "Unavailable";
+        } else if($book->remarks == "Good") {
+            $book->status = "Available";
+        }
         $book->isbn = $validated['isbn'];
         $book->title = $validated['title'];
         $book->description = $validated['description'];
@@ -258,7 +287,7 @@ class BookController extends Controller
         ->where('issn', '=', 'none')
         ->get();
 
-        $books=$books->where('status', '=', 'Available');
+        // $books=$books->where('status', '=', 'Available')->orWhere('status', '=', 'Unavailable')->get();
 
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, "notifications"=>$notifications])->with('success', 'Books')->with('link', 'books');

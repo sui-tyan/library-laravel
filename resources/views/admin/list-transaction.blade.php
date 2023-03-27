@@ -334,6 +334,9 @@
                           Purpose
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Price
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Date Borrowed
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -374,6 +377,9 @@
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->purpose}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$transaction->bookPrice}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->dateBorrowed}}

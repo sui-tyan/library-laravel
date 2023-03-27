@@ -112,35 +112,30 @@
   </div>
 </nav>
 <div class="grid grid-cols-3">
-  <div class="books col-span-2 mx-10">
+  <div class="books col-span-2 mx-10 my-10">
     <div class="book">
       <h2 class="text-2xl font-semibold italic">{{$book->title}}</h2>
-      <div class="book-details">
-        <p>Publish Date: {{$book->publishedDate}}</p>
-        <p>Author: {{$book->author}}</p>
-        <p>Description: {{$book->description}}</p>
-        <p>Category: {{$book->categories}}</p>
-        <p>Price: {{$book->price}}</p>
-        <p>Type: {{$book->type}}</p>
-        <p>Publisher: {{$book->publisher}}</p>
-        @if(Auth::check())
-        <a href="/borrow/{{$book->id}}" class="my-5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-          Borrow
-        </a>
-        @else
-        <a href="/borrow/{{$book->id}}" class="my-5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-          Borrow
-        </a>
-        @endif
+      <div class="book-details mb-5">
+        <p class="py-2"><span class="font-semibold">Publish Date:</span> {{$book->publishedDate}}</p>
+        <p class="py-2"><span class="font-semibold">Author:</span> {{$book->author}}</p>
+        <p class="py-2"><span class="font-semibold">Description:</span> {{$book->description}}</p>
+        <p class="py-2"><span class="font-semibold">Category:</span> {{$book->categories}}</p>
+        <p class="py-2"><span class="font-semibold">Price:</span> {{$book->price}}</p>
+        <p class="py-2"><span class="font-semibold">Type:</span> {{$book->type}}</p>
+        <p class="py-2"><span class="font-semibold">Publisher:</span> {{$book->publisher}}</p>
 
-      </div>
+
+
+      </div><a href="/borrow/{{$book->id}}" class="my-5 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        Borrow
+      </a>
     </div>
   </div>
-  <div class="book-categories">
+  <div class="book-categories my-10">
 
-    <h2 class="text-1xl font-semibold italic">Book Categories</h2>
+    <h2 class="text-2xl font-semibold italic">Book Categories</h2>
     @foreach($categories as $category)
-    <a href="/category/{{$category->id}}" class="block">{{$category->category}}</a>
+    <a href="/category/{{$category->id}}" class="block pt-2.5 font-semibold text-md">>> {{$category->category}}</a>
     @endforeach
   </div>
 </div>

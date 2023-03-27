@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string("librarian")->default("none-assigned");
             $table->date("dateBorrowed");
             $table->date("dueDate");
+            $table->string('bookPrice');
             $table->string("status");
             $table->string("purpose");
             $table->date("dateReturned")->nullable();

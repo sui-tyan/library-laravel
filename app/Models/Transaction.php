@@ -23,6 +23,7 @@ class Transaction extends Model
         'librarian',
         'dateBorrowed',
         'dueDate',
+        'bookPrice',
         'status',
         'purpose',
         'dateReturned',

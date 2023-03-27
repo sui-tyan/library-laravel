@@ -89,6 +89,9 @@ Route::group(['middleware' => ['admin']], function(){
 });
 
 
+Route::get("/admin/graph/borrower", [UserController::class, "booksAndBorrowersMonthly"]);
+Route::get("/admin/graph/departments", [UserController::class, "departmentMonthly"]);
+
 
 Route::get("/login", [UserController::class, "login"])->name("login")->middleware('guest');
 

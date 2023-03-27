@@ -84,7 +84,7 @@
               @endif
               @foreach($notifications as $notification)
               <li>
-                <a href="/admin/seen/{{$notification->id}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/seen/notif/{{$notification->id}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   Your book is ready for pickup failure to pick up will decline your transaction
                 </a>
               </li>
