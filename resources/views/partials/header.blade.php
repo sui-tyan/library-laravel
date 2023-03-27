@@ -14,3 +14,4 @@
         <!-- Styles -->
     </head>
     <body class="antialiased">
+    <script type="module" src="{{ mix('js/app.js') }}"></script>
