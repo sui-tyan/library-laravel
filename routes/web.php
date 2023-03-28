@@ -43,6 +43,8 @@ Route::group(['middleware' => ['admin']], function(){
 
     Route::post("/admin/add-book", [BookController::class, "postBook"]);
     Route::post("/admin/update-book", [BookController::class, "updateBook"]);
+    Route::post("/admin/update-journal", [BookController::class, "updateJournal"]);
+    Route::post("/admin/update-thesis", [BookController::class, "updateThesis"]);
     Route::post("/admin/add-journal", [BookController::class, "postJournal"]);
     Route::post("/admin/add-thesis", [BookController::class, "postThesis"]);
 

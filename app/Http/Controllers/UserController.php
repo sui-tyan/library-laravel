@@ -15,6 +15,7 @@ use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use \PDF;
+use \JavaScript;
 
 class UserController extends Controller
 {
@@ -845,6 +846,10 @@ class UserController extends Controller
         $borrower=json_encode($borrower);
         $borrowedBooks=json_encode($borrowedBooks);
         // return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications,], compact($borrowedBooks, $borrower));
+        JavaScript::put([
+            'borrower' => $borrower,
+            'books' => $borrowedBooks
+        ]);
         return view("admin.booksBorrowersGraph", compact('books', 'notifications', 'borrowedBooks', 'borrower'));
     }
 

@@ -1,12 +1,49 @@
+import ApexCharts from "apexcharts";
+
+var books = eval(take.books);
+var borrowers = eval(take.borrower);
+console.log(borrowers.length);
+var monthGraph = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nove",
+    "Dec",
+];
+
+console.log("test: " + books);
+
+var bookData = [];
+
+var monthFromController = [];
+
+var cumulativeUsers = [];
+
+for (let i = 0; i < books.length; i++) {
+    bookData.push(books[i].count);
+    monthFromController.push(monthGraph[books[i].month - 1]);
+}
+
+cumulativeUsers.push(borrowers.length);
+console.log(bookData);
+console.log(monthFromController);
+console.log(cumulativeUsers);
+
 var options = {
     series: [
         {
             name: "Books",
-            data: [5, 12, 36, 9, 28, 41, 3, 17, 22, 49, 8, 31],
+            data: bookData,
         },
         {
             name: "Borrowers",
-            data: [50, 27, 11, 6, 19, 43, 32, 14, 38, 9, 22, 47],
+            data: cumulativeUsers,
         },
     ],
     chart: {
@@ -64,20 +101,7 @@ var options = {
         size: 1,
     },
     xaxis: {
-        categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ],
+        categories: monthFromController,
         tickPlacement: "on",
         title: {
             text: "Month",
@@ -97,4 +121,9 @@ var options = {
     },
 };
 
-export default options;
+var booksBorrowersChart = new ApexCharts(
+    document.querySelector("#booksBorrowers"),
+    options
+);
+
+booksBorrowersChart.render();

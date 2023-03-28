@@ -280,6 +280,88 @@ class BookController extends Controller
 
         return redirect("/admin/book-list")->with("saved", "Book saved!");
     }
+
+    public function updateJournal(Request $req){
+        $validated=$req->validate([
+            "issn"=>"required",
+            "title"=>"required",
+            "description"=>"required",
+            "author"=>"required",
+            "publisher"=>"required",
+            "price"=>"required",
+            "publishedDate"=>"required",
+            "categories"=>"required",
+            "type"=>"required",
+            "remarks"=>"required",
+        ]);
+
+        $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
+        $query=DB::table("categories")->where('category', $validated['categories'])->get();
+        $deweyDecimal = $query->pluck('deweyDecimal')->first();
+        $validated['deweyDecimal'] = $deweyDecimal;
+        
+        
+
+        $book=Book::find($req->id);
+        if($book->remarks == 'Lost'){
+            $book->status = "Unavailable";
+        } else if($book->remarks == "Good") {
+            $book->status = "Available";
+        }
+        $book->issn = $validated['issn'];
+        $book->title = $validated['title'];
+        $book->description = $validated['description'];
+        $book->author = $validated['author'];
+        $book->publisher = $validated['publisher'];
+        $book->price = $validated['price'];
+        $book->publishedDate = $validated['publishedDate'];
+        $book->categories = $validated['categories'];
+        $book->type = $validated['type'];
+        $book->remarks = $validated['remarks'];
+        $book->save();
+
+        return redirect("/admin/journal-list")->with("saved", "Journal saved!");
+    }
+
+    public function updateThesis(Request $req){
+        $validated=$req->validate([
+            "title"=>"required",
+            "description"=>"required",
+            "author"=>"required",
+            "publisher"=>"required",
+            "price"=>"required",
+            "publishedDate"=>"required",
+            "categories"=>"required",
+            "type"=>"required",
+            "remarks"=>"required",
+        ]);
+
+        $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
+        $query=DB::table("categories")->where('category', $validated['categories'])->get();
+        $deweyDecimal = $query->pluck('deweyDecimal')->first();
+        $validated['deweyDecimal'] = $deweyDecimal;
+        
+        
+
+        $book=Book::find($req->id);
+        if($book->remarks == 'Lost'){
+            $book->status = "Unavailable";
+        } else if($book->remarks == "Good") {
+            $book->status = "Available";
+        }
+        $book->title = $validated['title'];
+        $book->description = $validated['description'];
+        $book->author = $validated['author'];
+        $book->publisher = $validated['publisher'];
+        $book->price = $validated['price'];
+        $book->publishedDate = $validated['publishedDate'];
+        $book->categories = $validated['categories'];
+        $book->type = $validated['type'];
+        $book->remarks = $validated['remarks'];
+        $book->save();
+
+        return redirect("/admin/thesis-list")->with("saved", "Thesis saved!");
+    }
     
     public function showBookList(){
         $books=DB::table('books')

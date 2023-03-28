@@ -1,3 +1,5 @@
+import ApexCharts from "apexcharts";
+
 var options = {
     series: [
         {
@@ -148,4 +150,8 @@ var options = {
     },
 };
 
-export default options;
+var departmentGraphChart = new ApexCharts(
+    document.querySelector("#departmentGraph"),
+    options
+);
+departmentGraphChart.render();

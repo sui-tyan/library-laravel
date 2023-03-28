@@ -4133,3 +4133,5 @@
     })();
 });
 //# sourceMappingURL=datepicker.js.map
+
+var date = $("#publishedDate").datepicker({ dateFormat: "yy-mm-dd" }).val();
