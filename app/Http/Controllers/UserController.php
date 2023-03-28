@@ -252,8 +252,10 @@ class UserController extends Controller
         
 
 
-        $overallSHS = DB::table('users')->where('department', '=', 'SHS')->get();
-        $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->get();
+        $overallSHSUsers = DB::table('users')->where('department', '=', 'SHS')->select('studentID')->distinct();
+        $overallSHSTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallSHS = $overallSHSUsers->union($overallSHSTransaction)->get();
+        $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $shsPercentage;
         if(count($overallSHS) != 0){
@@ -261,9 +263,13 @@ class UserController extends Controller
         } else {
             $shsPercentage = 0;
         }
+        
+        
 
-        $overallCAS = DB::table('users')->where('department', '=', 'CAS')->get();
-        $casBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->get();
+        $overallCASUsers = DB::table('users')->where('department', '=', 'CAS')->select('studentID')->distinct();
+        $overallCASTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCAS = $overallCASUsers->union($overallCASTransaction)->get();
+        $casBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $casPercentage;
         if(count($overallCAS) != 0){
@@ -272,18 +278,23 @@ class UserController extends Controller
             $casPercentage = 0;
         }
 
-        $overallCEA = DB::table('users')->where('department', '=', 'CEA')->get();
-        $ceaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->get();
+        $overallCEAUsers = DB::table('users')->where('department', '=', 'CEA')->select('studentID')->distinct();
+        $overallCEATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overAllCEA = $overallCEAUsers->union($overallCEATransaction)->get();
+        $ceaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+
 
         $ceaPercentage;
-        if(count($overallCEA) != 0){
-            $ceaPercentage = count($ceaBorrower) / count($overallCEA) * 100;
+        if(count($overAllCEA) != 0){
+            $ceaPercentage = count($ceaBorrower) / count($overAllCEA) * 100;
         } else {
             $ceaPercentage = 0;
         }
-
-        $overallCMA = DB::table('users')->where('department', '=', 'CMA')->get();
-        $cmaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->get();
+        // dd($overAllCEA);
+        $overallCMAUsers = DB::table('users')->where('department', '=', 'CMA')->select('studentID')->distinct();
+        $overallCMATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCMA = $overallCMAUsers->union($overallCMATransaction)->get();
+        $cmaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $cmaPercentage;
         if(count($overallCMA) != 0){
@@ -292,8 +303,10 @@ class UserController extends Controller
             $cmaPercentage = 0;
         }
 
-        $overallCELA = DB::table('users')->where('department', '=', 'CELA')->get();
-        $celaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->get();
+        $overallCELAUsers = DB::table('users')->where('department', '=', 'CELA')->select('studentID')->distinct();
+        $overallCELATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCELA = $overallCELAUsers->union($overallCELATransaction)->get();
+        $celaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $celaPercentage;
         if(count($overallCELA) != 0){
@@ -301,9 +314,10 @@ class UserController extends Controller
         } else {
             $celaPercentage = 0;
         }
-
-        $overallCHS = DB::table('users')->where('department', '=', 'CHS')->get();
-        $chsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->get();
+        $overallCHSUsers = DB::table('users')->where('department', '=', 'CHS')->select('studentID')->distinct();
+        $overallCHSTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCHS = $overallCHSUsers->union($overallCHSTransaction)->get();
+        $chsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $chsPercentage;
         if(count($overallCHS) != 0){
@@ -311,9 +325,10 @@ class UserController extends Controller
         } else {
             $chsPercentage = 0;
         }
-
-        $overallCITE = DB::table('users')->where('department', '=', 'CITE')->get();
-        $citeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->get();
+        $overallCITEUsers = DB::table('users')->where('department', '=', 'CITE')->select('studentID')->distinct();
+        $overallCITETransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCITE = $overallCITEUsers->union($overallCITETransaction)->get();
+        $citeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $citePercentage;
         if(count($overallCITE) != 0){
@@ -321,9 +336,10 @@ class UserController extends Controller
         } else {
             $citePercentage = 0;
         }
-
-        $overallCCJE = DB::table('users')->where('department', '=', 'CCJE')->get();
-        $ccjeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->get();
+        $overallCCJEUsers = DB::table('users')->where('department', '=', 'CCJE')->select('studentID')->distinct();
+        $overallCCJETransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallCCJE = $overallCCJEUsers->union($overallCCJETransaction)->get();
+        $ccjeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
 
         $ccjePercentage;
         if(count($overallCCJE) != 0){
@@ -375,7 +391,7 @@ class UserController extends Controller
             'overallCAS'=>$overallCAS,
             'ceaPercentage'=>$ceaPercentage,
             'ceaBorrowers'=>$ceaBorrower,
-            'overallCEA'=>$overallCEA,
+            'overallCEA'=>$overAllCEA,
             'cmaPercentage'=>$cmaPercentage,
             'cmaBorrowers'=>$cmaBorrower,
             'overallCMA'=>$overallCMA,
