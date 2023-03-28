@@ -245,11 +245,138 @@ class UserController extends Controller
         // $users = DB::table('users')
         // ->where('account_type', '=', 'student')
         // ->get();
+
+
+        $overallSHS = DB::table('users')->where('department', '=', 'SHS')->get();
+        $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->get();
+
+        $shsPercentage;
+        if(count($overallSHS) != 0){
+            $shsPercentage = count($shsBorrower) / count($overallSHS) * 100;
+        } else {
+            $shsPercentage = 0;
+        }
+
+        $overallCAS = DB::table('users')->where('department', '=', 'CAS')->get();
+        $casBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->get();
+
+        $casPercentage;
+        if(count($overallCAS) != 0){
+            $casPercentage = count($casBorrower) / count($overallCAS) * 100;
+        } else {
+            $casPercentage = 0;
+        }
+
+        $overallCEA = DB::table('users')->where('department', '=', 'CEA')->get();
+        $ceaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->get();
+
+        $ceaPercentage;
+        if(count($overallCEA) != 0){
+            $ceaPercentage = count($ceaBorrower) / count($overallCEA) * 100;
+        } else {
+            $ceaPercentage = 0;
+        }
+
+        $overallCMA = DB::table('users')->where('department', '=', 'CMA')->get();
+        $cmaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->get();
+
+        $cmaPercentage;
+        if(count($overallCMA) != 0){
+            $cmaPercentage = count($cmaBorrower) / count($overallCMA) * 100;
+        } else {
+            $cmaPercentage = 0;
+        }
+
+        $overallCELA = DB::table('users')->where('department', '=', 'CELA')->get();
+        $celaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->get();
+
+        $celaPercentage;
+        if(count($overallCELA) != 0){
+            $celaPercentage = count($celaBorrower) / count($overallCELA) * 100;
+        } else {
+            $celaPercentage = 0;
+        }
+
+        $overallCHS = DB::table('users')->where('department', '=', 'CHS')->get();
+        $chsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->get();
+
+        $chsPercentage;
+        if(count($overallCHS) != 0){
+            $chsPercentage = count($chsBorrower) / count($overallCHS) * 100;
+        } else {
+            $chsPercentage = 0;
+        }
+
+        $overallCITE = DB::table('users')->where('department', '=', 'CITE')->get();
+        $citeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->get();
+
+        $citePercentage;
+        if(count($overallCITE) != 0){
+            $citePercentage = count($citeBorrower) / count($overallCITE) * 100;
+        } else {
+            $citePercentage = 0;
+        }
+
+        $overallCCJE = DB::table('users')->where('department', '=', 'CCJE')->get();
+        $ccjeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->get();
+
+        $ccjePercentage;
+        if(count($overallCCJE) != 0){
+            $ccjePercentage = count($ccjeBorrower) / count($overallCCJE) * 100;
+        } else {
+            $ccjePercentage = 0;
+        }
+        
+
+        
+
+
+        
+
+        $overallUsers = DB::table('users')
+        ->where('account_type', '=', 'student')->get();
+        $borrowerUsers = DB::table('transactions')->where('remarks', '=', 'ongoing')->distinct()->get(); 
+
+
+        $userPercentage;
+        if(count($overallUsers) != 0){ 
+            $userPercentage = count($borrowerUsers) / count($overallUsers) * 100;
+        } else {
+            $userPercentage = 0;
+        }
+        
+        $borrowedBooks=DB::table('books')->where('status', '=', 'Unavailable')->get();
+        $overallBooks=Book::all();
+        
+        $booksPercentage = count($borrowedBooks) / count($overallBooks) * 100;
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
 
         // dd($books);
-        return view("admin.dashboard", ["books"=>$books, "notifications"=>$notifications]);
+        return view("admin.dashboard", [
+            'books'=>$books,
+            'notifications'=>$notifications,
+            'borrowedBooks'=>$borrowedBooks,
+            'bookPercentage' => $booksPercentage,
+            'userPercentage'=>$userPercentage,
+            'borrowerUsers'=>$borrowerUsers,
+            'shsPercentage'=>$shsPercentage,
+            'overallSHS'=>$overallSHS,
+            'casPercentage'=>$casPercentage,
+            'overallCAS'=>$overallCAS,
+            'ceaPercentage'=>$ceaPercentage,
+            'overallCEA'=>$overallCEA,
+            'cmaPercentage'=>$cmaPercentage,
+            'overallCMA'=>$overallCMA,
+            'celaPercentage'=>$celaPercentage,
+            'overallCELA'=>$overallCELA,
+            'chsPercentage'=>$chsPercentage,
+            'overallCHS'=>$overallCHS,
+            'citePercentage'=>$citePercentage,
+            'overallCITE'=>$overallCITE,
+            'ccjePercentage'=>$ccjePercentage,
+            'overallCCJE'=>$overallCCJE,
+        ]);
     }
 
 
@@ -695,4 +822,5 @@ class UserController extends Controller
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.departmentGraph", ["books"=>$books, "notifications"=>$notifications]);
     }
+
 }

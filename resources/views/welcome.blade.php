@@ -113,7 +113,7 @@
 </nav>
 
 <!-- Hero section -->
-<section class="bg-whitebg-no-repeat h-[75vh] bg-cover" style="background-image:url('/images/UPang.jpg')">
+<section class="bg-whitebg-no-repeat h-[75vh] bg-cover drop-shadow-lg" style="background-image:url('/images/UPang.jpg')">
   <div class="h-full w-full flex justify-center items-center bg-black bg-opacity-70">
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
       <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">PHINMA-UPANG COLLEGE OF URDANETA</h1>
@@ -123,27 +123,174 @@
   </div>
 </section>
 
-<!-- Featured List -->
-<section class="bg-white h-[100vh] my-16">
-  <div class="container text-center">
-    <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">Featured Lists</h1>
-    <p class="mb-8 text-4xl font-normal text-black lg:text-xl sm:px-16 xl:px-48">Available in Library</p>
-  </div>
-
-  <div class="container">
-    <div class="flex flex-wrap gap-5 justify-center items-center text-center">
-      <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 flex justify-center mb-5 lg:mb-0" onclick="(location.href='')">
-        <div class="icon-box">
-          <h4 class="title"><a href="">HEI Researchers</a></h4>
-          <div class="icon">
-            <img src="./assets/img/database/hei-researchers.png" alt="">
-          </div>
-          <p class="description">Click to View</p>
-        </div>
-      </div>
+<!-- Featured Categories -->
+<section class="bg-[#fcfcf8] py-16">
+  <div class="flex justify-center">
+    <div class="container text-center">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-[#19b032] md:text-5xl lg:text-6xl">Featured Categories</h1>
+      <p class="mb-8 text-4xl font-normal text-black lg:text-xl sm:px-16 xl:px-48">Available in Library</p>
     </div>
   </div>
 
+  <div class="flex justify-center">
+    <div class="container flex flex-wrap gap-4 md:gap-16 justify-center items-center text-center">
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Computers, Information and General References</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Philosophy and Psychology</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Religion</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Social Sciences</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Language</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Science</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Technology</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Arts and Recreation</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Literature</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">History and Geography</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">All</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 
 </section>
 

@@ -277,13 +277,13 @@
                 <tbody class="divide-y divide-gray-100">
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/books-and-borrowers'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Borrowers</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">42</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowerUsers)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">5%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($userPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-cyan-600 h-2 rounded-sm" style="width: 5%"></div>
+                            <div class="bg-cyan-600 h-2 rounded-sm" style="width: {{$userPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -291,13 +291,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/books-and-borrowers'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Books</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">59</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowedBooks)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">24%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($bookPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-orange-300 h-2 rounded-sm" style="width: 24%"></div>
+                            <div class="bg-orange-300 h-2 rounded-sm" style="width: {{$bookPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -326,13 +326,13 @@
                 <tbody class="divide-y divide-gray-100">
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">SHS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">5,649</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallSHS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">30%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($shsPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#48523e] h-2 rounded-sm" style="width: 30%"></div>
+                            <div class="bg-[#48523e] h-2 rounded-sm" style="width: {{$shsPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -340,13 +340,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CAS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">4,025</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCAS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">24%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($casPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#49672f] h-2 rounded-sm" style="width: 24%"></div>
+                            <div class="bg-[#49672f] h-2 rounded-sm" style="width: {{$casPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -354,13 +354,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CEA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">3,105</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCEA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">18%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($ceaPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#690404] h-2 rounded-sm" style="width: 18%"></div>
+                            <div class="bg-[#690404] h-2 rounded-sm" style="width: {{$ceaPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -368,13 +368,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CMA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">1251</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCMA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">12%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($cmaPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#c5b32a] h-2 rounded-sm" style="width: 12%"></div>
+                            <div class="bg-[#c5b32a] h-2 rounded-sm" style="width: {{$cmaPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -382,13 +382,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CELA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">734</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCELA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">9%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($celaPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#201cef] h-2 rounded-sm" style="width: 9%"></div>
+                            <div class="bg-[#201cef] h-2 rounded-sm" style="width: {{$celaPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -396,13 +396,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CHS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">891</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCHS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">5%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($chsPercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#989899] h-2 rounded-sm" style="width: 5%"></div>
+                            <div class="bg-[#989899] h-2 rounded-sm" style="width: {{$chsPercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -410,13 +410,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CITE</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">394</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCITE)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">34%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($citePercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#000000] h-2 rounded-sm" style="width: 34%"></div>
+                            <div class="bg-[#000000] h-2 rounded-sm" style="width: {{$citePercentage}}%"></div>
                           </div>
                         </div>
                       </div>
@@ -424,13 +424,13 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CCJE</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">819</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCCJE)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
-                        <span class="mr-2 text-xs font-medium">23%</span>
+                        <span class="mr-2 text-xs font-medium">{{number_format($ccjePercentage, 2)}}%</span>
                         <div class="relative w-full">
                           <div class="w-full bg-gray-200 rounded-sm h-2">
-                            <div class="bg-[#81a581] h-2 rounded-sm" style="width: 23%"></div>
+                            <div class="bg-[#81a581] h-2 rounded-sm" style="width: {{$ccjePercentage}}%"></div>
                           </div>
                         </div>
                       </div>
