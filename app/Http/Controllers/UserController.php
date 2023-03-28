@@ -246,6 +246,8 @@ class UserController extends Controller
         // ->where('account_type', '=', 'student')
         // ->get();
 
+        
+
 
         $overallSHS = DB::table('users')->where('department', '=', 'SHS')->get();
         $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->get();
@@ -780,27 +782,29 @@ class UserController extends Controller
     }
 
     public function booksAndBorrowersMonthly(){
-        $books = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
-            ->groupBy('month')
-            ->get();
+        // $books = Transaction::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+        //     ->groupBy('month')
+        //     ->get();
 
-        $booksMonthly = $books->pluck('month')->toJson();
+        // $booksMonthly = $books->pluck('month')->toJson();
 
         // $books = Transaction::all(); //all books
         // $borrower = DB::table('transactions')->select('borrowerID')->distinct()->get(); //all unique borrowers
-    //     $borrower = DB::table('transactions')
-    // ->select('borrowerID')
-    // ->whereMonth('created_at', date('m'))
-    // ->whereYear('created_at', date('Y'))
-    // ->distinct()
-    // ->get();
         // dd($booksMonthly);
-
         $borrower = DB::table('transactions')
+    ->select('borrowerID')
+    ->whereMonth('created_at', date('m'))
+    ->whereYear('created_at', date('Y'))
+    ->distinct()
+    ->get();
+
+    dd(count($borrower));
+
+        $borrowedBooks = DB::table('transactions')
                 ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
                 ->groupBy('month')
                 ->get()->toArray();
-        dd($borrower);
+        dd($borrowedBooks);
     }
 
     public function departmentMonthly(){
@@ -822,9 +826,26 @@ class UserController extends Controller
         dd($citeUsers);
     }
     public function booksBorrowersGraph() {
+        
+        $borrower = DB::table('transactions')
+        ->select('borrowerID')
+        ->whereMonth('created_at', date('m'))
+        ->whereYear('created_at', date('Y'))
+        ->distinct()
+        ->get();
+
+        $borrowedBooks = DB::table('transactions')
+                ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+                ->groupBy('month')
+                ->get()->toArray();
+
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
-        return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications]);
+
+        $borrower=json_encode($borrower);
+        $borrowedBooks=json_encode($borrowedBooks);
+        // return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications,], compact($borrowedBooks, $borrower));
+        return view("admin.booksBorrowersGraph", compact('books', 'notifications', 'borrowedBooks', 'borrower'));
     }
 
     public function departmentGraph() {
