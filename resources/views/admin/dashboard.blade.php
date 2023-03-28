@@ -277,7 +277,7 @@
                 <tbody class="divide-y divide-gray-100">
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/books-and-borrowers'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Borrowers</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowerUsers)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowerUsers)}} / {{count($overallUsers)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($userPercentage, 2)}}%</span>
@@ -291,7 +291,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/books-and-borrowers'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Books</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowedBooks)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowedBooks)}} / {{count($overallBooks)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($bookPercentage, 2)}}%</span>

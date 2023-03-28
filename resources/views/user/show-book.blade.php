@@ -111,18 +111,18 @@
     </div>
   </div>
 </nav>
-<div class="grid grid-cols-3">
+<div class="grid grid-cols-3 py-5 bg-[#fcfcf8]">
   <div class="books col-span-2 mx-10 my-10">
-    <div class="book">
+    <div class="book mb-10 bg-white p-10 rounded-xl shadow-lg">
       <h2 class="text-2xl font-semibold italic">{{$book->title}}</h2>
       <div class="book-details mb-5">
-        <p class="py-2"><span class="font-semibold">Publish Date:</span> {{$book->publishedDate}}</p>
-        <p class="py-2"><span class="font-semibold">Author:</span> {{$book->author}}</p>
-        <p class="py-2"><span class="font-semibold">Description:</span> {{$book->description}}</p>
-        <p class="py-2"><span class="font-semibold">Category:</span> {{$book->categories}}</p>
-        <p class="py-2"><span class="font-semibold">Price:</span> {{$book->price}}</p>
-        <p class="py-2"><span class="font-semibold">Type:</span> {{$book->type}}</p>
-        <p class="py-2"><span class="font-semibold">Publisher:</span> {{$book->publisher}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Publish Date:</span> {{$book->publishedDate}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Author:</span> {{$book->author}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Description:</span> {{$book->description}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Category:</span> {{$book->categories}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Price:</span> {{$book->price}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Type:</span> {{$book->type}}</p>
+        <p class="py-2"><span class="font-semibold text-[#345434]">Publisher:</span> {{$book->publisher}}</p>
 
 
 
