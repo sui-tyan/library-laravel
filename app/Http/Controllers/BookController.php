@@ -111,6 +111,12 @@ class BookController extends Controller
             "remarks"=>"required",
         ]);
 
+        if($validated['remarks'] == 'Lost'){
+            $validated['status'] = 'Unavailable';
+        } else if($validated['remarks'] == 'Good'){
+            $validated['status'] = 'Available';
+        }
+
         $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
         $query=DB::table("categories")->where('category', $validated['categories'])->get();
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
@@ -137,6 +143,12 @@ class BookController extends Controller
             "remarks"=>"required",
         ]);
 
+        if($validated['remarks'] == 'Lost'){
+            $validated['status'] = 'Unavailable';
+        } else if($validated['remarks'] == 'Good'){
+            $validated['status'] = 'Available';
+        }
+
         $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
         $query=DB::table("categories")->where('category', $validated['categories'])->get();
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
@@ -161,6 +173,12 @@ class BookController extends Controller
             "type"=>"required",
             "remarks"=>"required",
         ]);
+
+        if($validated['remarks'] == 'Lost'){
+            $validated['status'] = 'Unavailable';
+        } else if($validated['remarks'] == 'Good'){
+            $validated['status'] = 'Available';
+        }
 
         $validated['publishedDate'] = Carbon::createFromFormat('m/d/Y', $req->publishedDate)->format('Y-m-d');
         $query=DB::table("categories")->where('category', $validated['categories'])->get();
@@ -261,9 +279,9 @@ class BookController extends Controller
         
 
         $book=Book::find($req->id);
-        if($book->remarks == 'Lost'){
+        if($validated['remarks'] == 'Lost'){
             $book->status = "Unavailable";
-        } else if($book->remarks == "Good") {
+        } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
         $book->isbn = $validated['isbn'];
@@ -303,9 +321,9 @@ class BookController extends Controller
         
 
         $book=Book::find($req->id);
-        if($book->remarks == 'Lost'){
+        if($validated['remarks'] == 'Lost'){
             $book->status = "Unavailable";
-        } else if($book->remarks == "Good") {
+        } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
         $book->issn = $validated['issn'];
@@ -344,9 +362,9 @@ class BookController extends Controller
         
 
         $book=Book::find($req->id);
-        if($book->remarks == 'Lost'){
+        if($validated['remarks'] == 'Lost'){
             $book->status = "Unavailable";
-        } else if($book->remarks == "Good") {
+        } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
         $book->title = $validated['title'];
@@ -380,7 +398,7 @@ class BookController extends Controller
         ->where('issn', '!=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        $books=$books->where('status', '=', 'Available');
+        // $books=$books->where('status', '=', 'Available');
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Journals')->with('link', 'journals');
     }
@@ -390,7 +408,7 @@ class BookController extends Controller
         ->where('issn', '=', 'none')
         ->where('isbn', '=', 'none')
         ->get();
-        $books=$books->where('status', '=', 'Available');
+        // $books=$books->where('status', '=', 'Available');
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.book-list", ["books"=>$books, 'notifications'=>$notifications])->with('success', 'Thesis')->with('link', 'thesis');
     }
