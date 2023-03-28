@@ -828,12 +828,21 @@ class UserController extends Controller
     }
     public function booksBorrowersGraph() {
         
-        $borrower = DB::table('transactions')
-        ->select('borrowerID')
-        ->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'))
-        ->distinct()
-        ->get();
+        $months = DB::table('transactions')
+        ->selectRaw('DISTINCT MONTH(created_at) as month')
+        ->orderBy('month')
+        ->pluck('month');
+        
+        $borrower = [];
+        for ($month = 0; $month <= (count($months)-1); $month++) {
+            $count = DB::table('transactions')
+            ->select('borrowerID')
+            ->whereMonth('created_at', $months[$month])
+            ->whereYear('created_at', date('Y'))
+            ->distinct()
+            ->get();
+            $borrower[$month] = count($count);
+        }
 
         $borrowedBooks = DB::table('transactions')
                 ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
@@ -845,12 +854,13 @@ class UserController extends Controller
 
         $borrower=json_encode($borrower);
         $borrowedBooks=json_encode($borrowedBooks);
-        // return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications,], compact($borrowedBooks, $borrower));
+
         JavaScript::put([
             'borrower' => $borrower,
             'books' => $borrowedBooks
         ]);
-        return view("admin.booksBorrowersGraph", compact('books', 'notifications', 'borrowedBooks', 'borrower'));
+        
+        return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications,]);
     }
 
     public function departmentGraph() {

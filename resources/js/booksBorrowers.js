@@ -2,7 +2,7 @@ import ApexCharts from "apexcharts";
 
 var books = eval(take.books);
 var borrowers = eval(take.borrower);
-console.log(borrowers.length);
+
 var monthGraph = [
     "Jan",
     "Feb",
@@ -28,9 +28,9 @@ var cumulativeUsers = [];
 for (let i = 0; i < books.length; i++) {
     bookData.push(books[i].count);
     monthFromController.push(monthGraph[books[i].month - 1]);
+    cumulativeUsers.push(borrowers[i]);
 }
 
-cumulativeUsers.push(borrowers.length);
 console.log(bookData);
 console.log(monthFromController);
 console.log(cumulativeUsers);
