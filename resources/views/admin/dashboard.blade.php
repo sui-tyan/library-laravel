@@ -270,7 +270,7 @@
                 <thead>
                   <tr>
                     <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Categories</th>
-                    <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Users</th>
+                    <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Count</th>
                     <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">Percentage</th>
                   </tr>
                 </thead>
@@ -319,14 +319,14 @@
                 <thead>
                   <tr>
                     <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Categories</th>
-                    <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Users</th>
+                    <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">User</th>
                     <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">Percentage</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">SHS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallSHS)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($shsBorrowers)}} / {{count($overallSHS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($shsPercentage, 2)}}%</span>
@@ -340,7 +340,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CAS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCAS)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($casBorrowers)}} / {{count($overallCAS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($casPercentage, 2)}}%</span>
@@ -354,7 +354,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CEA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCEA)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($ceaBorrowers)}} / {{count($overallCEA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($ceaPercentage, 2)}}%</span>
@@ -368,7 +368,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CMA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCMA)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($cmaBorrowers)}} / {{count($overallCMA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($cmaPercentage, 2)}}%</span>
@@ -382,7 +382,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CELA</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCELA)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($celaBorrowers)}} / {{count($overallCELA)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($celaPercentage, 2)}}%</span>
@@ -396,7 +396,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CHS</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCHS)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($chsBorrowers)}} / {{count($overallCHS)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($chsPercentage, 2)}}%</span>
@@ -410,7 +410,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CITE</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCITE)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($citeBorrowers)}} / {{count($overallCITE)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($citePercentage, 2)}}%</span>
@@ -424,7 +424,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/department-graph'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">CCJE</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($overallCCJE)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($ccjeBorrowers)}} / {{count($overallCCJE)}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($ccjePercentage, 2)}}%</span>
