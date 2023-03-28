@@ -185,10 +185,10 @@ class BookController extends Controller
     public function postCategory(Request $req){
         // dd($req);
         $validated=$req->validate([
+            "deweyDecimal"=>"required",
             "category"=>"required",
         ]);
-        
-       $validated['deweyDecimal']="0";
+    
 
         $category=Category::create($validated);
         

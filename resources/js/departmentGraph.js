@@ -1,5 +1,44 @@
 import ApexCharts from "apexcharts";
 
+var userDepartment = eval(window.userDepartment);
+var months = eval(window.months);
+
+console.log("test" + months);
+
+var monthGraph = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nove",
+    "Dec",
+];
+
+fetch("/fetch-req")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+
+// var bookData = [];
+
+// var monthFromController = [];
+
+// var cumulativeUsers = [];
+
+// for (let i = 0; i < books.length; i++) {
+//     bookData.push(books[i].count);
+//     monthFromController.push(monthGraph[books[i].month - 1]);
+//     cumulativeUsers.push(borrowers[i]);
+// }
+
+// console.log(bookData);
+// console.log(monthFromController);
+// console.log(cumulativeUsers);
+
 var options = {
     series: [
         {

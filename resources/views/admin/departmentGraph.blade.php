@@ -267,7 +267,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/dropdown.js') }}"></script>
 
 
-@include('partials.adminfooter');
+@include('partials.departmentGraph');
 
 
 <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

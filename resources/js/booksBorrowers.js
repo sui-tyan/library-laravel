@@ -1,7 +1,7 @@
 import ApexCharts from "apexcharts";
 
-var books = eval(take.books);
-var borrowers = eval(take.borrower);
+var books = eval(window.books);
+var borrowers = eval(window.borrower);
 
 var monthGraph = [
     "Jan",

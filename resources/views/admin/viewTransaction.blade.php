@@ -1,5 +1,4 @@
-@include("partials.header");
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+@include('partials.header')
 <nav class="bg-white border-b border-gray-200 fixed z-30 w-full top-0">
   <div class="px-3 py-5 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
@@ -242,187 +241,90 @@
     </div>
   </aside>
   <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
+
+
+
   <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
     <main>
       <div class="py-6 px-4">
-        <div class="mb-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
-          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <span class="text-base sm:text-lg leading-none font-bold text-gray-900">Requested List</span>
-                <h3 class="text-base font-normal text-gray-500">Requested books list</h3>
-              </div>
-              <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
 
-                <a href="/admin/requested-list">
-                  <span class="mr-1">View</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </a>
 
-              </div>
+        <div class="w-1/2 mx-auto border p-5 rounded-md my-5">
+
+          <div class="relative z-0 w-full mb-6 group">
+            <input readonly value="{{$transaction->borrower}}" type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student Name</label>
+          </div>
+          <div class="grid grid-cols-3 md:gap-6">
+            <div class="relative z-0 w-11/12 mb-6 group">
+              <input readonly value="{{$transaction->borrowerID}}" type="text" name="borrowerID" id="borrowerID" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="borrowerID" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student ID</label>
+            </div>
+
+            <div class="relative z-0 w-11/12 mb-6 group">
+              <input readonly value="{{$transaction->borrowerCourseAndYear}}" type="text" name="borrowerCourseAndYear" id="borrowerCourseAndYear" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="borrowerCourseAndYear" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Course And Year</label>
+            </div>
+
+            <div class="relative z-0 w-11/12 mb-6 group">
+              <input readonly value="{{$transaction->borrowerDepartment}}" type="text" name="borrowerDepartment" id="borrowerDepartment" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="borrowerDepartment" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student Department</label>
             </div>
           </div>
-          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <span class="text-base sm:text-lg leading-none font-bold text-gray-900">Returned List</span>
-                <h3 class="text-base font-normal text-gray-500">Returned books list</h3>
-              </div>
-              <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-
-                <a href="/admin/returned-list">
-                  <span class="mr-1">View</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </a>
+          <div class="relative z-0 w-full mb-6 group">
+            <input readonly value="{{$transaction->borrowerContactNumber}}" type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contact Number</label>
+          </div>
 
 
-              </div>
+          <div class="relative z-0 w-full mb-6 group">
+            <input readonly value="{{$transaction->title}}" type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Book Title</label>
+          </div>
+
+
+          <div class="grid grid-cols-2 md:gap-6">
+
+
+
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->categories}}" type="text" name="categories" id="categories" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="categories" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
+            </div>
+
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->bookID}}" type="text" name="bookID" id="bookID" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="bookID" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Book ID</label>
             </div>
           </div>
+          <div class="grid grid-cols-2 md:gap-6">
+
+
+
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->bookPrice}}" type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Book Price</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->remarks}}" type="text" name="remarks" id="remarks" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="remarks" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Remarks</label>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->dateBorrowed}}" type="text" name="dateBorrowed" id="dateBorrowed" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="dateBorrowed" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date Borrowed</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+              <input readonly value="{{$transaction->dateReturned}}" type="text" name="dateReturned" id="dateReturned" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+              <label for="dateReturned" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date Returned</label>
+            </div>
+          </div>
+
         </div>
-        <div class="w-full ">
-          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-
-            <div class="mb-4 flex items-center justify-between">
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Requested List</h3>
-              </div>
-              <form method="post" action="/admin/search/requested">
-                @csrf
-                <div class="flex justify-end">
-
-                  <div class="relative z-0 group ">
-                    <input type="text" name="search" id="search" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                    <label for="search" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Search</label>
-
-                  </div>
-                  <button type="submit" class="ml-5 mr-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search</button>
-
-              </form>
-              <div class="flex items-center">
-                <a href="/admin/export/available-csv" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table</a>
-                <a href="/admin/export/available-pdf" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">Export Table as PDF</a>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col mt-1">
-            <div class="overflow-x-auto rounded-lg">
-              <div class="align-middle inline-block min-w-full">
-                <div class="shadow overflow-hidden sm:rounded-lg">
-                  <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                      <tr>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          ISBN/ISSN
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Title
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Category
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Borrower
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date Borrowed
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Due Date
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="bg-gray-50 border">
-                      @foreach($transactions as $transaction)
-                      <tr class="border">
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          @if($transaction->isbn != 'none')
-                          {{$transaction->isbn}}
-                          @elseif($transaction->issn != 'none')
-                          {{$transaction->issn}}
-                          @else
-
-                          @endif
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->title}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->categories}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->borrower}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->dateBorrowed}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->dueDate}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->status}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-
-                          @if($transaction->status == 'pending')
-                          <span class="inline-block">
-                            <a href="/admin/claimed/{{$transaction->id}}">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                              </svg>
-                            </a>
-                          </span>
-                          @elseif($transaction->status == 'claimed')
-                          <span class="inline-block">
-                            <a href="/admin/returned/{{$transaction->id}}">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                              </svg>
-                            </a>
-                          </span>
-                          @else
-
-                          @endif
 
 
 
-
-
-                          <span class="inline-block">
-                            <a href="/admin/delete/transaction/{{$transaction->id}}">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            </a>
-                          </span>
-                          <span class="inline-block">
-                            <a href="/admin/view/item/{{$transaction->id}}">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                              </svg>
-                            </a>
-                          </span>
-
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </main>
   </div>

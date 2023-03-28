@@ -54,6 +54,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get("/admin/claimed/{id}", [TransactionController::class, "claimed"]);
     Route::get("/admin/returned/{id}", [TransactionController::class, "returned"]);
     Route::get("/admin/delete/account/{id}", [UserController::class, "deleteStudent"]);
+    Route::get("/admin/view/item/{id}" , [TransactionController::class, "viewTransaction"]);
     
     Route::post("/addStudent", [UserController::class, "addStudent"]);
     Route::post("/addStaff", [UserController::class, "addStaff"]);
@@ -123,3 +124,5 @@ Route::post("/authenticate", [UserController::class, "authenticate"]);
 
 Route::get("/admin/login", [UserController::class, "adminLogin"]);
 Route::post("/admin/authenticate", [UserController::class, "adminAuthenticate"]);
+
+Route::get("/fetch-req", [UserController::class, "fetchTest"]);

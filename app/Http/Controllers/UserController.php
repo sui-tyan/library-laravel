@@ -12,6 +12,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Book;
 use App\Models\Notification;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 use \PDF;
@@ -21,7 +22,8 @@ class UserController extends Controller
 {
     public function home(){
         $notifications=DB::table('notifications')->where('isSeenStudent', '=', 0)->get();
-        return view("welcome", ['notifications'=>$notifications]);
+        $categories = Category::all();
+        return view("welcome", ['notifications'=>$notifications, 'categories'=>$categories]);
     }
 
     public function login(){
@@ -859,13 +861,44 @@ class UserController extends Controller
             'borrower' => $borrower,
             'books' => $borrowedBooks
         ]);
-        
+
         return view("admin.booksBorrowersGraph", ["books"=>$books, "notifications"=>$notifications,]);
     }
 
     public function departmentGraph() {
+        $months = DB::table('transactions')
+        ->selectRaw('DISTINCT MONTH(created_at) as month')
+        ->orderBy('month')
+        ->pluck('month');
+
+        $departments = array("SHS", "CAS", "CEA", "CMA", "CELA", "CHS", "CITE", "CCJE");
+
+        $userDepartment = [];
+        for ($dep = 0; $dep < count($months); $dep++) {
+            $userDepartmentMonth = [];
+            for ($dep1 = 0; $dep1 < count($departments); $dep1++) {
+                $user = DB::table('transactions')
+                ->select('borrowerID')
+                ->where('borrowerDepartment', '=', $departments[$dep1])
+                ->whereMonth('created_at', $months[$dep])
+                ->distinct()
+                ->get();
+                $userDepartmentMonth[$dep1] = count($user);
+            }
+            $userDepartment[$dep] = $userDepartmentMonth;
+        }
+
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+
+        $userDepartment=json_encode($userDepartment);
+        $months=json_encode($months);
+
+        JavaScript::put([
+            'userDepartment' => $userDepartment,
+            'months' => $months,
+        ]);
+        
         return view("admin.departmentGraph", ["books"=>$books, "notifications"=>$notifications]);
     }
 

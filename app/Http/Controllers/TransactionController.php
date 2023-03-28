@@ -60,6 +60,12 @@ class TransactionController extends Controller
         return redirect("/admin/requested-list");
     }
 
+    public function viewTransaction($id){
+        $transaction=Transaction::find($id);
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.viewTransaction", ["notifications"=>$notifications, "transaction"=>$transaction]);
+    }
+
     public function deleteTransaction($id){
         $delete = DB::table('transactions')->where('id', $id)->delete();
         return redirect("/admin/requested-list")->with("deleted", "Transaction deleted!");
