@@ -274,7 +274,7 @@
               </li>
             </ul>
 
-            <h2 class="text-sm font-semibold text-gray-900 dark:text-white">By clicking "I Accpet" you agree to the terms and condition of PUCU Library</h2>
+            <h2 class="text-sm font-semibold text-gray-900 dark:text-white">By clicking "I Accept" you agree to the terms and condition of PUCU Library</h2>
           </div>
           <!-- Modal footer -->
           <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -406,7 +406,7 @@
                 </li>
               </ul>
 
-              <h2 class="text-sm font-semibold text-gray-900 dark:text-white">By clicking "I Accpet" you agree to the terms and condition of PUCU Library</h2>
+              <h2 class="text-sm font-semibold text-gray-900 dark:text-white">By clicking "I Accept" you agree to the terms and condition of PUCU Library</h2>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
