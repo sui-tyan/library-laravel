@@ -277,7 +277,21 @@
       <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
         <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
           <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
-            <h4 class="font-bold text-xl">All</h4>
+            <h4 class="font-bold text-xl">Journals</h4>
+            <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
+                <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
+              </svg>
+            </div>
+            <p class="my-3 font-bold text-white text-md">Click to View</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-1/3 pr-4 pl-4 lg:w-1/4 xl:w-1/5 flex justify-center mb-5 lg:mb-0">
+        <div class="group hover:cursor-pointer" onclick="(location.href='/books')">
+          <div class="w-[270px] h-[330px] my-4 py-10 bg-white group-hover:bg-[#345434] text-[#345434] group-hover:ease-in-out group-hover:duration-300 group-hover:text-white flex flex-col justify-center items-center gap-5 rounded-xl drop-shadow-lg px-4">
+            <h4 class="font-bold text-xl">Thesis and Dissertation</h4>
             <div class="h-28 w-28 rounded-full bg-[#E9E9E9] group-hover:bg-white group-hover:ease-in-out group-hover:duration-300 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-16 w-16 mx-auto fill-[#067134]">
                 <path d="M448 336v-288C448 21.49 426.5 0 400 0H352v191.1c0 13.41-15.52 20.88-25.1 12.49L272 160L217.1 204.5C207.5 212.8 192 205.4 192 191.1V0H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-32c0-11.72-6.607-21.52-16-27.1v-81.36C441.8 362.8 448 350.2 448 336zM384 448H96c-17.67 0-32-14.33-32-32c0-17.67 14.33-32 32-32h288V448z" />
