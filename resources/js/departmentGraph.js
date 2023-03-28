@@ -1,9 +1,24 @@
 import ApexCharts from "apexcharts";
 
-var userDepartment = eval(window.userDepartment);
-var months = eval(window.months);
+var departmentGraphData = document.getElementById("departmentGraphData");
 
-console.log("test" + months);
+var userDepartment = departmentGraphData.getAttribute("data-user-department");
+var months = JSON.parse(departmentGraphData.getAttribute("data-months"));
+
+var strDepartmentGraphData = userDepartment;
+var cleanStrDepartmentGraphData = strDepartmentGraphData.replace(
+    /[^0-9,]/g,
+    ""
+);
+var arrayDepartmentGraphData = cleanStrDepartmentGraphData
+    .split(",")
+    .map(Number);
+
+var strMonths = months;
+var cleanStrMonths = strMonths.replace(/[^0-9,]/g, "");
+var arrayMonth = cleanStrMonths.split(",").map(Number);
+
+console.log(arrayMonth.length);
 
 var monthGraph = [
     "Jan",
@@ -19,72 +34,95 @@ var monthGraph = [
     "Dec",
 ];
 
-fetch("/fetch-req")
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+var shs = [];
+var cas = [];
+var cea = [];
+var cma = [];
+var cela = [];
+var chs = [];
+var cite = [];
+var ccje = [];
 
-// var bookData = [];
+for (var i = 0; i < arrayDepartmentGraphData.length; i++) {
+    switch (i % 8) {
+        case 0:
+            shs.push(arrayDepartmentGraphData[i]);
+            break;
+        case 1:
+            cas.push(arrayDepartmentGraphData[i]);
+            break;
+        case 2:
+            cea.push(arrayDepartmentGraphData[i]);
+            break;
+        case 3:
+            cma.push(arrayDepartmentGraphData[i]);
+            break;
+        case 4:
+            cela.push(arrayDepartmentGraphData[i]);
+            break;
+        case 5:
+            chs.push(arrayDepartmentGraphData[i]);
+            break;
+        case 6:
+            cite.push(arrayDepartmentGraphData[i]);
+            break;
+        case 7:
+            ccje.push(arrayDepartmentGraphData[i]);
+            break;
+    }
+}
 
-// var monthFromController = [];
+var monthFromController = [];
 
 // var cumulativeUsers = [];
 
-// for (let i = 0; i < books.length; i++) {
-//     bookData.push(books[i].count);
-//     monthFromController.push(monthGraph[books[i].month - 1]);
-//     cumulativeUsers.push(borrowers[i]);
-// }
+for (let i = 0; i < arrayMonth.length; i++) {
+    monthFromController.push(monthGraph[arrayMonth[i] - 1]);
+}
 
 // console.log(bookData);
-// console.log(monthFromController);
+console.log(monthFromController);
 // console.log(cumulativeUsers);
 
 var options = {
     series: [
         {
             name: "SHS",
-            data: [22, 34, 8, 15, 41, 39, 27, 46, 51, 13, 48, 7],
+            data: shs,
         },
         {
             name: "CAS",
-            data: [44, 27, 9, 21, 36, 15, 6, 30, 50, 14, 5, 37],
+            data: cas,
         },
         {
             name: "CEA",
-            data: [13, 45, 8, 40, 51, 22, 27, 33, 50, 2, 31, 9],
+            data: cea,
         },
         {
             name: "CMA",
-            data: [38, 47, 17, 24, 20, 35, 10, 50, 23, 4, 7, 32],
+            data: cma,
         },
         {
             name: "CELA",
-            data: [30, 19, 2, 16, 36, 7, 41, 42, 12, 32, 14, 51],
+            data: cela,
         },
         {
             name: "CHS",
-            data: [24, 20, 3, 45, 50, 28, 8, 36, 2, 51, 15, 12],
+            data: chs,
         },
         {
             name: "CITE",
-            data: [7, 26, 45, 35, 14, 29, 39, 21, 41, 48, 2, 16],
+            data: cite,
         },
         {
             name: "CCJE",
-            data: [23, 30, 51, 8, 37, 44, 11, 50, 3, 24, 7, 38],
+            data: ccje,
         },
     ],
     chart: {
-        height: 450,
         type: "bar",
-        dropShadow: {
-            enabled: true,
-            color: "#000",
-            top: 18,
-            left: 7,
-            blur: 10,
-            opacity: 0.2,
-        },
+        height: 450,
+        stacked: true,
         toolbar: {
             show: true,
             offsetY: -20,
@@ -115,65 +153,47 @@ var options = {
     dataLabels: {
         enabled: true,
     },
-    stroke: {
-        curve: "smooth",
-    },
     title: {
         text: "Per Department Graph",
         align: "left",
         offsetY: 10,
     },
-    grid: {
-        borderColor: "#e7e7e7",
-        row: {
-            colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-            opacity: 0.5,
+    responsive: [
+        {
+            breakpoint: 480,
+            options: {
+                legend: {
+                    position: "bottom",
+                    offsetX: -10,
+                    offsetY: 0,
+                },
+            },
         },
-        padding: {
-            left: 30, // or whatever value that works
-            right: 30, // or whatever value that works
+    ],
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            borderRadius: 10,
+            dataLabels: {
+                total: {
+                    enabled: true,
+                    style: {
+                        fontSize: "13px",
+                        fontWeight: 900,
+                    },
+                },
+            },
         },
     },
     markers: {
         size: 1,
     },
     xaxis: {
-        categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ],
+        categories: monthFromController,
         tickPlacement: "on",
         title: {
             text: "Month",
         },
-        zoom: {
-            enabled: true,
-            type: "x",
-            autoScaleYaxis: false,
-            zoomedArea: {
-                fill: {
-                    color: "#90CAF9",
-                    opacity: 0.4,
-                },
-                stroke: {
-                    color: "#0D47A1",
-                    opacity: 0.4,
-                    width: 1,
-                },
-            },
-        },
-        min: 3,
-        max: 3,
     },
     yaxis: {
         title: {
@@ -181,11 +201,11 @@ var options = {
         },
     },
     legend: {
-        position: "top",
-        horizontalAlign: "right",
-        floating: true,
-        offsetY: -25,
-        offsetX: -5,
+        position: "right",
+        offsetY: 40,
+    },
+    fill: {
+        opacity: 1,
     },
 };
 

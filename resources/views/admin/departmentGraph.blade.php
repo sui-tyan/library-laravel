@@ -259,6 +259,8 @@
           </div>
         </div>
 
+        <div id="departmentGraphData" data-user-department="{{ json_encode($userDepartment) }}" data-months="{{ json_encode($months) }}"></div>
+
       </div>
     </main>
   </div>

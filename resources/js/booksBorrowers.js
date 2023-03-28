@@ -1,8 +1,7 @@
 import ApexCharts from "apexcharts";
 
-var books = eval(window.books);
-var borrowers = eval(window.borrower);
-
+var books = eval(take.books);
+var borrowers = eval(take.borrower);
 var monthGraph = [
     "Jan",
     "Feb",
@@ -49,14 +48,6 @@ var options = {
     chart: {
         height: 450,
         type: "bar",
-        dropShadow: {
-            enabled: true,
-            color: "#000",
-            top: 18,
-            left: 7,
-            blur: 10,
-            opacity: 0.2,
-        },
         toolbar: {
             show: true,
             offsetY: -20,

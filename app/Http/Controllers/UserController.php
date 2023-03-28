@@ -891,15 +891,9 @@ class UserController extends Controller
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
 
-        $userDepartment=json_encode($userDepartment);
-        $months=json_encode($months);
-
-        JavaScript::put([
-            'userDepartment' => $userDepartment,
-            'months' => $months,
-        ]);
         
-        return view("admin.departmentGraph", ["books"=>$books, "notifications"=>$notifications]);
+        return view("admin.departmentGraph", ["books"=>$books, "notifications"=>$notifications, 'userDepartment' => json_encode($userDepartment),
+        'months' => json_encode($months),]);
     }
 
 }

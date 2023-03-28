@@ -123,7 +123,11 @@
 </div>
 @endif
 <div class="grid w-3/4 mx-auto grid-cols-1 lg:grid-cols-2 mb-5">
-
+  @if($errors->any())
+  @foreach($errors->all() as $error)
+  {{ $error }}
+  @endforeach
+  @endif
   <div class="profile mx-5">
     <h2 class="text-2xl font-semibold text-center lg:text-left m-5 lg:ml-0">Book Details</h2>
     <div class="relative z-0 w-full mb-6 group">
@@ -316,6 +320,7 @@
       <input value="{{$book->issn}}" type="hidden" name="issn" id="issn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
       <input value="{{$book->title}}" type="hidden" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
       <input value="{{$book->categories}}" type="hidden" name="categories" id="categories" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
+      <input value="{{$book->price}}" type="hidden" name="bookPrice" id="bookPrice" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
       <input value="pending" type="hidden" name="status" id="status" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
       <input value="not-assigned" type="hidden" name="librarian" id="librarian" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#19b032] peer" required />
       <div class="relative z-0 w-full mb-6 group">
