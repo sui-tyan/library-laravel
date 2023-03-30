@@ -315,6 +315,9 @@
                           Price
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Quantity
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -354,6 +357,9 @@
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$book->price}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->quantity}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$book->status}}

@@ -15,7 +15,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->account_type == 'admin'){
+        if(auth()->user()->account_type == 'admin' || auth()->user()->account_type == 'librarian'){
             return $next($request);
           }
             return redirect('/')->with('error','You have not admin access');

@@ -45,7 +45,7 @@ class UserController extends Controller
         if(auth()->attempt($validated)){
             $user=DB::table('users')->where('name', '=', $req->name)->first();
             if($user != null){
-                if($user->account_type == 'admin'){
+                if($user->account_type == 'admin' || $user->account_type == 'librarian'){
                     $req->session()->regenerate();
                     return redirect("/admin/dashboard");
                 } else {
@@ -55,7 +55,7 @@ class UserController extends Controller
                 return redirect("/admin/login")->with("fail", "Wrong credentials!");
             }
         } else {
-            return redirect("/admin/login")->with("fail", "Wrong credentials!");
+            return redirect("/admin/login")->with("fail", "You do not have access here!");
         }
 
         
@@ -187,7 +187,14 @@ class UserController extends Controller
             "status" => "required",
         ]);
 
+        $bookStatus = Book::find($validated['bookID']);
+        $bookQuantity = DB::table('books')->where('id', '=', $validated['bookID'])->decrement('quantity');
+        $quantity = $bookStatus->quantity;
+        if($quantity < 0){
+            $bookStatus->status = 'Unavailable';
+        }
 
+        $bookStatus->save();
         
         $validated['purpose'] = "1 day";
 
@@ -223,21 +230,32 @@ class UserController extends Controller
                 }
             }
 
+            $walkIn = DB::table('users')->where('studentID', '=', $validated['borrowerID'])->get();
+
+            if(count($walkIn) == 0){
+                $validated['status'] = 'claimed';
+                $book=DB::table('books')
+                ->where('title', '=', $req->title)
+                ->update(['status'=>'Unavailable']);
+                $transaction = Transaction::create($validated);
+                return redirect("/");
+            } else {
+                Notification::create([
+                    'studentID' => $req->borrowerID,
+                    'borrowerName' => $name,
+                    'borrowedBookTitle' => $req->title,
+                    'borrowedBookID' => $statusBook->id,
+                    'borrowedContent' => $contentType,
+                    'isSeen' => 0,
+                    'isSeenStudent' => 0,
+                ]);
+                $book=DB::table('books')
+                ->where('title', '=', $req->title)
+                ->update(['status'=>'Unavailable']);
+                $transaction = Transaction::create($validated);
+                return redirect("/");
+            }
             
-            Notification::create([
-                'studentID' => $req->borrowerID,
-                'borrowerName' => $name,
-                'borrowedBookTitle' => $req->title,
-                'borrowedBookID' => $statusBook->id,
-                'borrowedContent' => $contentType,
-                'isSeen' => 0,
-                'isSeenStudent' => 0,
-            ]);
-            $book=DB::table('books')
-            ->where('title', '=', $req->title)
-            ->update(['status'=>'Unavailable']);
-            $transaction = Transaction::create($validated);
-            return redirect("/");
         }
         
 
@@ -255,7 +273,7 @@ class UserController extends Controller
         $overallSHSUsers = DB::table('users')->where('department', '=', 'SHS')->select('studentID')->distinct();
         $overallSHSTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallSHS = $overallSHSUsers->union($overallSHSTransaction)->get();
-        $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $shsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'SHS')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $shsPercentage;
         if(count($overallSHS) != 0){
@@ -269,7 +287,7 @@ class UserController extends Controller
         $overallCASUsers = DB::table('users')->where('department', '=', 'CAS')->select('studentID')->distinct();
         $overallCASTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCAS = $overallCASUsers->union($overallCASTransaction)->get();
-        $casBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $casBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CAS')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $casPercentage;
         if(count($overallCAS) != 0){
@@ -281,8 +299,9 @@ class UserController extends Controller
         $overallCEAUsers = DB::table('users')->where('department', '=', 'CEA')->select('studentID')->distinct();
         $overallCEATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overAllCEA = $overallCEAUsers->union($overallCEATransaction)->get();
-        $ceaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $ceaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CEA')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
+        // dd($ceaBorrower);
 
         $ceaPercentage;
         if(count($overAllCEA) != 0){
@@ -294,7 +313,7 @@ class UserController extends Controller
         $overallCMAUsers = DB::table('users')->where('department', '=', 'CMA')->select('studentID')->distinct();
         $overallCMATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCMA = $overallCMAUsers->union($overallCMATransaction)->get();
-        $cmaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $cmaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CMA')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $cmaPercentage;
         if(count($overallCMA) != 0){
@@ -306,7 +325,7 @@ class UserController extends Controller
         $overallCELAUsers = DB::table('users')->where('department', '=', 'CELA')->select('studentID')->distinct();
         $overallCELATransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCELA = $overallCELAUsers->union($overallCELATransaction)->get();
-        $celaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $celaBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CELA')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $celaPercentage;
         if(count($overallCELA) != 0){
@@ -317,7 +336,7 @@ class UserController extends Controller
         $overallCHSUsers = DB::table('users')->where('department', '=', 'CHS')->select('studentID')->distinct();
         $overallCHSTransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCHS = $overallCHSUsers->union($overallCHSTransaction)->get();
-        $chsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $chsBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CHS')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $chsPercentage;
         if(count($overallCHS) != 0){
@@ -328,7 +347,7 @@ class UserController extends Controller
         $overallCITEUsers = DB::table('users')->where('department', '=', 'CITE')->select('studentID')->distinct();
         $overallCITETransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCITE = $overallCITEUsers->union($overallCITETransaction)->get();
-        $citeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $citeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CITE')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $citePercentage;
         if(count($overallCITE) != 0){
@@ -339,7 +358,7 @@ class UserController extends Controller
         $overallCCJEUsers = DB::table('users')->where('department', '=', 'CCJE')->select('studentID')->distinct();
         $overallCCJETransaction = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
         $overallCCJE = $overallCCJEUsers->union($overallCCJETransaction)->get();
-        $ccjeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct()->get();
+        $ccjeBorrower = DB::table('transactions')->where('borrowerDepartment', '=', 'CCJE')->where('remarks', '=', 'ongoing')->where('status', '=', 'claimed')->select('borrowerID')->distinct()->get();
 
         $ccjePercentage;
         if(count($overallCCJE) != 0){
@@ -348,10 +367,6 @@ class UserController extends Controller
             $ccjePercentage = 0;
         }
         
-
-        
-
-
         
 
         $overallUsers = DB::table('users')
@@ -366,14 +381,22 @@ class UserController extends Controller
             $userPercentage = 0;
         }
         
-        $borrowedBooks=DB::table('books')->where('status', '=', 'Unavailable')->get();
+        // $borrowedBooks=DB::table('books')->where('status', '=', 'Unavailable')->get();
+        // $borrowedBooks=DB::table('transactions')->where('status', '=', 'claimed')->get();
+        // $borrowedBooks = DB::table('transactions')->where('status', '=', 'claimed')->get();
+
+        $unavailableBooks=DB::table('books')->where('status', '=', 'Unavailable')->pluck('id')->toArray();
+        $borrowedBooks=DB::table('transactions')->whereIn('bookID', $unavailableBooks)->where('status', '=', 'claimed')->get();
+
+
         $overallBooks=Book::all();
         
         $booksPercentage = count($borrowedBooks) / count($overallBooks) * 100;
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
 
-        // dd($books);
+
+        // dd($borrowedBooks);
         return view("admin.dashboard", [
             'books'=>$books,
             'notifications'=>$notifications,

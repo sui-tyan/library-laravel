@@ -20,6 +20,7 @@ class Book extends Model
         "author",
         "type",
         "price",
+        "quantity",
         "status",
         "remarks",
     ];

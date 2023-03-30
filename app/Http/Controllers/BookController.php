@@ -105,6 +105,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -137,6 +138,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -168,6 +170,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -224,7 +227,7 @@ class BookController extends Controller
     public function showCategories($id){
         $categories=Category::all();
         $selectedCategory=Category::findOrFail($id);
-        $showBooks=Book::where('categories', $selectedCategory->category)->get();
+        $showBooks=Book::where('categories', $selectedCategory->category)->where('status', '=', 'Available')->get();
         
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
@@ -265,6 +268,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -284,6 +288,11 @@ class BookController extends Controller
         } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
+
+        if($validated['quantity'] > 0){
+            $book->status = 'Available';
+        }
+        $book->quantity = $validated['quantity'];
         $book->isbn = $validated['isbn'];
         $book->title = $validated['title'];
         $book->description = $validated['description'];
@@ -307,6 +316,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -326,6 +336,7 @@ class BookController extends Controller
         } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
+        $book->quantity = $validated['quantity'];
         $book->issn = $validated['issn'];
         $book->title = $validated['title'];
         $book->description = $validated['description'];
@@ -348,6 +359,7 @@ class BookController extends Controller
             "author"=>"required",
             "publisher"=>"required",
             "price"=>"required",
+            "quantity"=>"required",
             "publishedDate"=>"required",
             "categories"=>"required",
             "type"=>"required",
@@ -367,6 +379,7 @@ class BookController extends Controller
         } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
+        $book->quantity = $validated['quantity'];
         $book->title = $validated['title'];
         $book->description = $validated['description'];
         $book->author = $validated['author'];

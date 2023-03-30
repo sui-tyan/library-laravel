@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer("deweyDecimal");
             $table->string("categories");
             $table->integer("price");
+            $table->integer("quantity");
             $table->date("publishedDate");
             $table->string("type");
             $table->string("status")->default("Available");

@@ -55,7 +55,12 @@ class TransactionController extends Controller
         }
         
         $transaction->save();
-        $book=DB::table('books')->where('title', '=', $transaction->title)->update(['status' => 'Available']);
+        $book = Book::find($transaction->bookID);
+        $book->increment('quantity');
+
+        if ($book->quantity > 0) {
+            $book->update(['status' => 'Available']);
+        }
 
         return redirect("/admin/requested-list");
     }
