@@ -470,6 +470,14 @@ class UserController extends Controller
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.returned", ["transactions"=>$requested, 'notifications'=>$notifications]);
     }
+    public function showClaimedList(){
+        $requested = DB::table('transactions')
+        ->where('status', '=', 'claimed')
+        ->get();
+        $books=DB::table('books')->where('status', '=', 'Available')->get();
+        $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
+        return view("admin.claimed", ["transactions"=>$requested, 'notifications'=>$notifications]);
+    }
 
     public function deleteStudent($id){
         $delete = DB::table('users')->where('id', $id)->delete();

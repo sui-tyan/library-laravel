@@ -481,6 +481,24 @@
               </div>
             </div>
           </div>
+          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <span class="text-base sm:text-lg leading-none font-bold text-gray-900">Claimed List</span>
+                <h3 class="text-base font-normal text-gray-500">Claimed books list</h3>
+              </div>
+              <div class="ml-5 w-0 flex items-center justify-end flex-1 text-green-500 text-base font-bold">
+
+                <a href="/admin/claimed-list">
+                  <span class="mr-1">View</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+
+              </div>
+            </div>
+          </div>
         </div>
         <div class="w-full ">
           <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">

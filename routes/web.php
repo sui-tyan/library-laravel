@@ -22,6 +22,7 @@ Route::group(['middleware' => ['admin']], function(){
 
     Route::get("/admin/requested-list", [UserController::class, "showRequestedList"]);
     Route::get("/admin/returned-list", [UserController::class, "showReturnedList"]);
+    Route::get("/admin/claimed-list", [UserController::class, "showClaimedList"]);
     Route::get("/admin/dashboard", [UserController::class, "dashboard"]);
     Route::get("/admin/book-list", [BookController::class, "showBookList"]);
     Route::get("/admin/journal-list", [BookController::class, "showJournalList"]);

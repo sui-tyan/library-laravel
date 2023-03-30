@@ -306,7 +306,7 @@
 
             <div class="mb-4 flex items-center justify-between">
               <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Returned List</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Claimed List</h3>
               </div>
               <form method="post" action="/admin/search/returned">
                 @csrf
@@ -352,13 +352,7 @@
                           Due Date
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Librarian
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
-                        </th>
-                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date Returned
                         </th>
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Remarks
@@ -393,17 +387,35 @@
                           {{$transaction->dueDate}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->librarian}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->status}}
-                        </td>
-                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$transaction->dateReturned}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$transaction->remarks}}
                         </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          <span class="inline-block">
+                            <a href="/admin/returned/{{$transaction->id}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                              </svg>
+                            </a>
+                          </span>
+                          <span class="inline-block">
+                            <a href="/admin/delete/transaction/{{$transaction->id}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </a>
+                          </span>
+                          <span class="inline-block">
+                            <a href="/admin/view/item/{{$transaction->id}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                              </svg>
+                            </a>
+                          </span>
+                        </td>
+
                       </tr>
                       @endforeach
                     </tbody>
