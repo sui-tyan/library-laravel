@@ -289,8 +289,13 @@ class BookController extends Controller
             $book->status = "Available";
         }
 
+
         if($validated['quantity'] > 0){
             $book->status = 'Available';
+        } 
+        if($validated['quantity'] <= 0){
+            $book->status = 'Unavailable';
+
         }
         $book->quantity = $validated['quantity'];
         $book->isbn = $validated['isbn'];
