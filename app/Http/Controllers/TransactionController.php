@@ -56,9 +56,9 @@ class TransactionController extends Controller
         
         $transaction->save();
         $book = Book::find($transaction->bookID);
-        $book->increment('quantity');
+        $book->increment('currentQuantity');
 
-        if ($book->quantity > 0) {
+        if ($book->currentQuantity > 0) {
             $book->update(['status' => 'Available']);
         }
 

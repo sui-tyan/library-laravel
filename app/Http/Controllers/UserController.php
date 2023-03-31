@@ -187,18 +187,20 @@ class UserController extends Controller
             "status" => "required",
         ]);
 
-        $bookStatus = Book::find($validated['bookID']);
-        $bookQuantity = DB::table('books')->where('id', '=', $validated['bookID'])->decrement('quantity');
-        $quantity = $bookStatus->quantity;
-        if($quantity < 0){
-            $bookStatus->status = 'Unavailable';
-        }
+        
+        // $bookQuantity = DB::table('books')->where('id', '=', $validated['bookID'])->decrement('quantity');
+        // $bookStatus = Book::find($validated['bookID']); //babalikan kita
+        // $quantity = $bookStatus->quantity;
+        
+        // if(($quantity) < 1){
+        //     $bookStatus->status = 'Unavailable';
+        // }
 
-        $bookStatus->save();
+        // $bookStatus->save();
         
         $validated['purpose'] = "1 day";
 
-        // dd($validated);
+        // dd($bookStatus->quantity);
         
         $statusBook=DB::table('books')
         ->where('title', '=', $req->title)->first();
@@ -222,8 +224,8 @@ class UserController extends Controller
 
             if($student != null){
                 
-            if($student->firstName == null){
-                $name = $validated['borrower'];
+                if($student->firstName == null){
+                    $name = $validated['borrower'];
     
                 } else {
                     $name = $student->firstName;
@@ -234,9 +236,21 @@ class UserController extends Controller
 
             if(count($walkIn) == 0){
                 $validated['status'] = 'claimed';
-                $book=DB::table('books')
-                ->where('title', '=', $req->title)
-                ->update(['status'=>'Unavailable']);
+                // $book=DB::table('books')
+                // ->where('title', '=', $req->title) babalikan kita
+                // // ->update(['status'=>'Unavailable']);
+                // if(($quantity - 1) <= 0){
+                //     $bookStatus->status = 'Unavailable';
+                // }
+                $bookQuantity = DB::table('books')->where('id', '=', $validated['bookID'])->decrement('currentQuantity');
+                $bookStatus = Book::find($validated['bookID']); //babalikan kita
+                $quantity = $bookStatus->currentQuantity;
+                
+                if(($quantity) < 1){
+                    $bookStatus->status = 'Unavailable';
+                }
+
+                $bookStatus->save();
                 $transaction = Transaction::create($validated);
                 return redirect("/");
             } else {
@@ -249,9 +263,21 @@ class UserController extends Controller
                     'isSeen' => 0,
                     'isSeenStudent' => 0,
                 ]);
-                $book=DB::table('books')
-                ->where('title', '=', $req->title)
-                ->update(['status'=>'Unavailable']);
+                // $book=DB::table('books')
+                // ->where('title', '=', $req->title)
+                // ->update(['status'=>'Unavailable']);
+                // if(($quantity - 1) <= 0){
+                //     $bookStatus->status = 'Unavailable';
+                // }
+                $bookQuantity = DB::table('books')->where('id', '=', $validated['bookID'])->decrement('currentQuantity');
+                $bookStatus = Book::find($validated['bookID']); //babalikan kita
+                $quantity = $bookStatus->currentQuantity;
+                
+                if(($quantity) < 1){
+                    $bookStatus->status = 'Unavailable';
+                }
+
+                $bookStatus->save();
                 $transaction = Transaction::create($validated);
                 return redirect("/");
             }
@@ -369,9 +395,20 @@ class UserController extends Controller
         
         
 
-        $overallUsers = DB::table('users')
-        ->where('account_type', '=', 'student')->get();
-        $borrowerUsers = DB::table('transactions')->where('remarks', '=', 'ongoing')->distinct()->get(); 
+        $overallSchoolUsers = DB::table('users')
+        ->where('account_type', '=', 'student')->select('studentID')->distinct();
+        $overallUsersTransaction = DB::table('transactions')->where('remarks', '=', 'ongoing')->select('borrowerID')->distinct();
+        $overallUsers = $overallSchoolUsers->union($overallUsersTransaction)->get();
+
+        // dd($overallUsers);
+        // $overallUsers = DB::table('transactions')
+        // $borrowerUsers = DB::table('transactions')->where('remarks', '=', 'ongoing')->distinct()->get(); 
+        $borrowerUsers = DB::table('transactions')
+                    ->select('borrowerID', 'remarks') 
+                    ->where('remarks', '=', 'ongoing')
+                    ->distinct('borrowerID')
+                    ->get();
+        // dd($borrowerUsers);
 
 
         $userPercentage;
@@ -385,13 +422,26 @@ class UserController extends Controller
         // $borrowedBooks=DB::table('transactions')->where('status', '=', 'claimed')->get();
         // $borrowedBooks = DB::table('transactions')->where('status', '=', 'claimed')->get();
 
-        $unavailableBooks=DB::table('books')->where('status', '=', 'Unavailable')->pluck('id')->toArray();
-        $borrowedBooks=DB::table('transactions')->whereIn('bookID', $unavailableBooks)->where('status', '=', 'claimed')->get();
-
-
-        $overallBooks=Book::all();
+        // $unavailableBooks=DB::table('books')->where('status', '=', 'Unavailable')->pluck('id')->toArray();
+        // $borrowedBooks=DB::table('transactions')->whereIn('bookID', $unavailableBooks)->where('status', '=', 'claimed')->get();
+        $unclaimedBooks=DB::table('books')->whereColumn('quantity', '<>', 'currentQuantity')->pluck('id')->toArray();
+        $borrowedBooks=DB::table('transactions')->whereIn('bookID', $unclaimedBooks)->where('status', '=', 'claimed')->get();
+        // $borrowedBooks=Book::sum('currentQuantity');
         
-        $booksPercentage = count($borrowedBooks) / count($overallBooks) * 100;
+        // dd($borrowedBooks);
+
+        $overallBooks=Book::sum('quantity');
+
+        // dd($overallBooks);
+        
+        $booksPercentage;
+        if($overallBooks != 0){
+            $booksPercentage = count($borrowedBooks) / $overallBooks * 100;
+        } else {
+            $booksPercentage = 0;
+        }
+
+        
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
 
@@ -875,6 +925,7 @@ class UserController extends Controller
         $citeUsers = $cite->pluck('total')->toJson(); //[2, 1]
         dd($citeUsers);
     }
+
     public function booksBorrowersGraph() {
         
         $months = DB::table('transactions')

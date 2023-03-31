@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("categories");
             $table->integer("price");
             $table->integer("quantity");
+            $table->integer("currentQuantity");
             $table->date("publishedDate");
             $table->string("type");
             $table->string("status")->default("Available");

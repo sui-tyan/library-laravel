@@ -79,7 +79,6 @@ class BookController extends Controller
 
     public function addBook(){
         $category=Category::all();
-        
         $books=DB::table('books')->where('status', '=', 'Available')->get();
         $notifications=DB::table('notifications')->where('isSeen', '=', 0)->get();
         return view("admin.books", ['category'=>$category, 'notifications'=>$notifications])->with('link', 'book');
@@ -123,6 +122,7 @@ class BookController extends Controller
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
         $validated['deweyDecimal'] = $deweyDecimal;
 
+        $validated['currentQuantity'] = $validated['quantity'];
 
         $book=Book::create($validated);
 
@@ -156,6 +156,7 @@ class BookController extends Controller
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
         $validated['deweyDecimal'] = $deweyDecimal;
 
+        $validated['currentQuantity'] = $validated['quantity'];
 
         $book=Book::create($validated);
 
@@ -187,7 +188,10 @@ class BookController extends Controller
         $query=DB::table("categories")->where('category', $validated['categories'])->get();
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
         $validated['deweyDecimal'] = $deweyDecimal;
+        
+        $validated['currentQuantity'] = $validated['quantity'];
 
+        // dd($validated['currentQuantity']);
 
         $book=Book::create($validated);
 
@@ -280,7 +284,6 @@ class BookController extends Controller
         $deweyDecimal = $query->pluck('deweyDecimal')->first();
         $validated['deweyDecimal'] = $deweyDecimal;
         
-        
 
         $book=Book::find($req->id);
         if($validated['remarks'] == 'Lost'){
@@ -297,6 +300,11 @@ class BookController extends Controller
             $book->status = 'Unavailable';
 
         }
+
+        $quantityDiff = $validated['quantity'] - $book->quantity;
+
+        // dd($quantityDiff);
+        $book->currentQuantity += $quantityDiff;
         $book->quantity = $validated['quantity'];
         $book->isbn = $validated['isbn'];
         $book->title = $validated['title'];
@@ -341,6 +349,11 @@ class BookController extends Controller
         } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
+
+        $quantityDiff = $validated['quantity'] - $book->quantity;
+
+        // dd($quantityDiff);
+        $book->currentQuantity += $quantityDiff;
         $book->quantity = $validated['quantity'];
         $book->issn = $validated['issn'];
         $book->title = $validated['title'];
@@ -384,6 +397,11 @@ class BookController extends Controller
         } else if($validated['remarks'] == "Good") {
             $book->status = "Available";
         }
+
+        $quantityDiff = $validated['quantity'] - $book->quantity;
+
+        // dd($quantityDiff);
+        $book->currentQuantity += $quantityDiff;
         $book->quantity = $validated['quantity'];
         $book->title = $validated['title'];
         $book->description = $validated['description'];

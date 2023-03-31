@@ -359,7 +359,7 @@
                           {{$book->price}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                          {{$book->quantity}}
+                          {{$book->currentQuantity}} / {{$book->quantity}}
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$book->status}}

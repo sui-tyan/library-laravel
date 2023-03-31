@@ -291,7 +291,7 @@
                   </tr>
                   <tr class="text-gray-500 hover:bg-slate-200 hover:cursor-pointer" onclick="location.href='/admin/books-and-borrowers'">
                     <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Books</th>
-                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowedBooks)}} / {{count($overallBooks)}}</td>
+                    <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{count($borrowedBooks)}} / {{$overallBooks}}</td>
                     <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
                       <div class="flex items-center">
                         <span class="mr-2 text-xs font-medium">{{number_format($bookPercentage, 2)}}%</span>
@@ -541,6 +541,9 @@
                         <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Category
                         </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Quantity
+                        </th>
                       </tr>
                     </thead>
                     <tbody class="bg-gray-50 border">
@@ -554,6 +557,9 @@
                         </td>
                         <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {{$book->categories}}
+                        </td>
+                        <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                          {{$book->currentQuantity}} / {{$book->quantity}}
                         </td>
                       </tr>
                       @endforeach

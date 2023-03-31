@@ -21,6 +21,7 @@ class Book extends Model
         "type",
         "price",
         "quantity",
+        "currentQuantity",
         "status",
         "remarks",
     ];
